@@ -114,9 +114,20 @@ button {
 
 /* Celebration page */
 .celebrate {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
+}
+
+#confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.celebration-card {
+  z-index: 2;
 }
