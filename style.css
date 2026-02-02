@@ -61,6 +61,35 @@ button {
 #yesBtn {
   background: #ff5a8a;
   color: white;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+/* Golden glow */
+#yesBtn::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 40px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.8) 0%,
+    rgba(255, 215, 0, 0.4) 40%,
+    rgba(255, 215, 0, 0) 70%
+  );
+  opacity: 0;
+  filter: blur(10px);
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+/* Hover effect */
+#yesBtn:hover::before {
+  opacity: 1;
+}
+
+#yesBtn:hover {
+  transform: scale(1.08);
 }
 
 #noBtn {
@@ -142,4 +171,14 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+}
+
+@keyframes glowPulse {
+  0%   { opacity: 0.6; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+#yesBtn:hover::before {
+  animation: glowPulse 1.5s infinite;
 }
