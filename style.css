@@ -1,6 +1,6 @@
 * {
-  font-family: "Fredoka", sans-serif;
   box-sizing: border-box;
+  font-family: "Fredoka", sans-serif;
 }
 
 body {
@@ -17,14 +17,14 @@ body.sad {
   background: #6b6b6b;
 }
 
+/* Main card */
 .card {
-  background: #fff;
+  background: white;
   padding: 60px;
   border-radius: 30px;
-  text-align: center;
   width: 600px;
   max-width: 90vw;
-  position: relative;
+  text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
@@ -38,6 +38,7 @@ h1 {
   margin-bottom: 40px;
 }
 
+/* Buttons */
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -45,9 +46,9 @@ h1 {
 
 button {
   padding: 16px 40px;
-  border-radius: 25px;
+  border-radius: 30px;
   border: none;
-  font-size: 25px;
+  font-size: 22px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -65,27 +66,11 @@ button {
   transform: scale(1.1);
 }
 
-#bubble {
-  width: 140px;
-  position: absolute;
-  bottom: 120px;
-  right: -40px;
-  display: none;
-}
-
-#bubble-text {
-  position: absolute;
-  bottom: 155px;
-  right: -20px;
-  width: 120px;
-  font-size: 14px;
-  display: none;
-}
-
+/* Top message */
 #top-message {
   position: fixed;
   top: 30px;
-  font-size: 32px;           /* ⬅️ bigger */
+  font-size: 32px;
   color: white;
   opacity: 0;
   transition: opacity 0.5s;
@@ -95,13 +80,14 @@ button {
   opacity: 1;
 }
 
+/* Sad bubble */
 #sad-bubble {
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   background: #2f2f2f;
-  color: #fff;
+  color: white;
   padding: 20px 28px;
   border-radius: 30px;
   font-size: 18px;
@@ -110,15 +96,12 @@ button {
   animation: pop 0.3s ease;
 }
 
-/* cloud tail */
 #sad-bubble::after {
   content: "";
   position: absolute;
   bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-top: 12px solid #2f2f2f;
@@ -126,17 +109,14 @@ button {
 
 @keyframes pop {
   from { transform: translateX(-50%) scale(0.9); }
-  to   { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1); }
 }
 
+/* Celebration page */
 .celebrate {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
-}
-
-.celebrate .card {
-  z-index: 2;
 }
