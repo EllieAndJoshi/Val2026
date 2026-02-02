@@ -1,3 +1,4 @@
+/* Global reset */
 * {
   box-sizing: border-box;
   font-family: "Fredoka", sans-serif;
@@ -7,6 +8,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+/* =========================
+   MAIN PAGE
+========================= */
 
 body {
   background: #f6cbd6;
@@ -55,43 +60,49 @@ button {
   border: none;
   font-size: 22px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease;
 }
 
+/* YES BUTTON — golden glow */
 #yesBtn {
   background: #ff5a8a;
   color: white;
   position: relative;
-  overflow: visible;
   z-index: 1;
 }
-/* Golden glow */
+
 #yesBtn::before {
   content: "";
   position: absolute;
-  inset: -12px;
+  inset: -14px;
   border-radius: 40px;
   background: radial-gradient(
     circle,
-    rgba(255, 215, 0, 0.8) 0%,
-    rgba(255, 215, 0, 0.4) 40%,
+    rgba(255, 215, 0, 0.9) 0%,
+    rgba(255, 215, 0, 0.5) 40%,
     rgba(255, 215, 0, 0) 70%
   );
   opacity: 0;
-  filter: blur(10px);
+  filter: blur(12px);
   z-index: -1;
-  transition: opacity 0.4s ease;
-}
-
-/* Hover effect */
-#yesBtn:hover::before {
-  opacity: 1;
 }
 
 #yesBtn:hover {
   transform: scale(1.08);
 }
 
+#yesBtn:hover::before {
+  opacity: 1;
+  animation: glowPulse 1.5s infinite;
+}
+
+@keyframes glowPulse {
+  0%   { opacity: 0.6; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* NO BUTTON */
 #noBtn {
   background: #e0e0e0;
 }
@@ -108,6 +119,7 @@ button {
   color: white;
   opacity: 0;
   transition: opacity 0.5s;
+  pointer-events: none;
 }
 
 #top-message.show {
@@ -143,10 +155,13 @@ button {
 
 @keyframes pop {
   from { transform: translateX(-50%) scale(0.9); }
-  to { transform: translateX(-50%) scale(1); }
+  to   { transform: translateX(-50%) scale(1); }
 }
 
-/* Celebration page */
+/* =========================
+   CELEBRATION PAGE
+========================= */
+
 .celebrate {
   position: relative;
   width: 100vw;
@@ -155,30 +170,19 @@ button {
   background: #f6cbd6;
 }
 
+/* Confetti canvas */
 #confetti {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
 }
 
+/* Centered celebration card */
 .celebration-card {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-}
-
-@keyframes glowPulse {
-  0%   { opacity: 0.6; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
-#yesBtn:hover::before {
-  animation: glowPulse 1.5s infinite;
 }

@@ -5,10 +5,10 @@ const bubbleText = document.getElementById("bubble-text");
 const topMessage = document.getElementById("top-message");
 
 const messages = [
-  "Are you sure?",
-  "Are you REALLY sure???",
-  "I think this might be an error",
-  "That button feels wrong…"
+  "Tu joues à quoi?",
+  "EHHH lache ça???",
+  "Tu m'aimes plus c'est ça?!",
+  "Bon..."
 ];
 
 let msgIndex = 0;
@@ -37,11 +37,11 @@ noBtn.addEventListener("click", () => {
   document.body.classList.remove("sad");
   sadBubble.style.display = "none";
 
-  topMessage.textContent = "Nothing happened, let's restart 💔";
+  topMessage.textContent = "Nan bon aller plus sérieusement...";
   topMessage.classList.add("show");
 
   setTimeout(() => {
     topMessage.textContent = "";
     topMessage.classList.remove("show");
-  }, 10000);
+  }, 1000);
 });
