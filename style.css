@@ -1,5 +1,5 @@
 * {
-  font-family: "Arial Rounded MT Bold", sans-serif;
+  font-family: "Fredoka", sans-serif;
   box-sizing: border-box;
 }
 
@@ -19,20 +19,23 @@ body.sad {
 
 .card {
   background: #fff;
-  padding: 40px;
-  border-radius: 20px;
+  padding: 60px;
+  border-radius: 30px;
   text-align: center;
-  width: 420px;
+  width: 600px;
+  max-width: 90vw;
   position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 .icon {
-  width: 80px;
-  margin-bottom: 15px;
+  width: 110px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  margin-bottom: 30px;
+  font-size: 30px;
+  margin-bottom: 40px;
 }
 
 .buttons {
@@ -41,10 +44,10 @@ h1 {
 }
 
 button {
-  padding: 12px 30px;
+  padding: 16px 40px;
   border-radius: 25px;
   border: none;
-  font-size: 18px;
+  font-size: 25px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -81,7 +84,59 @@ button {
 
 #top-message {
   position: fixed;
-  top: 20px;
-  font-size: 18px;
+  top: 30px;
+  font-size: 32px;           /* ⬅️ bigger */
   color: white;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#top-message.show {
+  opacity: 1;
+}
+
+#sad-bubble {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2f2f2f;
+  color: #fff;
+  padding: 20px 28px;
+  border-radius: 30px;
+  font-size: 18px;
+  display: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  animation: pop 0.3s ease;
+}
+
+/* cloud tail */
+#sad-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #2f2f2f;
+}
+
+@keyframes pop {
+  from { transform: translateX(-50%) scale(0.9); }
+  to   { transform: translateX(-50%) scale(1); }
+}
+
+.celebrate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.celebrate .card {
+  z-index: 2;
 }
