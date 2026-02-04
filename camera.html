@@ -10,11 +10,26 @@
 
 <body class="camera-page">
 
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div id="sidebar-toggle">❯</div>
+
+    <button id="toggleFilter" class="pill-btn sidebar-btn">
+      Toggle filter
+    </button>
+
+    <button id="flipCamera" class="pill-btn sidebar-btn">
+      Flip camera
+    </button>
+  </div>
+
+  <!-- Camera -->
   <div class="camera-container">
     <video id="video" autoplay playsinline></video>
     <img
       src="assets/filters/valentine-filter.png"
       class="camera-filter"
+      id="cameraFilter"
       alt="filter"
     >
   </div>
