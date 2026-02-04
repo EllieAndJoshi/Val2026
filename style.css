@@ -63,7 +63,7 @@ button {
   transition: transform 0.3s ease;
 }
 
-/* YES button glow */
+/* YES BUTTON — golden glow */
 #yesBtn {
   background: #ff5a8a;
   color: white;
@@ -102,7 +102,7 @@ button {
   100% { opacity: 0.6; }
 }
 
-/* NO button */
+/* NO BUTTON */
 #noBtn {
   background: #e0e0e0;
 }
@@ -158,15 +158,6 @@ button {
   to   { transform: translateX(-50%) scale(1); }
 }
 
-/* 🔽 ADDED: Rain canvas styling */
-#rain {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  display: none;
-}
-
 /* =========================
    CELEBRATION PAGE
 ========================= */
@@ -179,6 +170,7 @@ button {
   background: #f6cbd6;
 }
 
+/* Confetti canvas */
 #confetti {
   position: fixed;
   inset: 0;
@@ -186,6 +178,7 @@ button {
   pointer-events: none;
 }
 
+/* Centered celebration card */
 .celebration-card {
   position: fixed;
   top: 50%;
