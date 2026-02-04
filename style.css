@@ -10,6 +10,31 @@ html, body {
 }
 
 /* =========================
+   BACKGROUND PICTURE WALL
+========================= */
+
+#picture-wall {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#picture-wall.active {
+  opacity: 0.25;
+}
+
+.picture {
+  position: absolute;
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transform: rotate(var(--rot));
+}
+
+/* =========================
    MAIN PAGE
 ========================= */
 
@@ -36,6 +61,7 @@ body.sad {
   max-width: 90vw;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  z-index: 2;
 }
 
 .icon {
@@ -120,6 +146,7 @@ button {
   opacity: 0;
   transition: opacity 0.5s;
   pointer-events: none;
+  z-index: 3;
 }
 
 #top-message.show {
@@ -140,6 +167,7 @@ button {
   display: none;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   animation: pop 0.3s ease;
+  z-index: 3;
 }
 
 #sad-bubble::after {
@@ -170,7 +198,6 @@ button {
   background: #f6cbd6;
 }
 
-/* Confetti canvas */
 #confetti {
   position: fixed;
   inset: 0;
@@ -178,7 +205,6 @@ button {
   pointer-events: none;
 }
 
-/* Centered celebration card */
 .celebration-card {
   position: fixed;
   top: 50%;
