@@ -6,9 +6,12 @@ const toggleArrow = document.getElementById("sidebar-toggle");
 
 const toggleFilterBtn = document.getElementById("toggleFilter");
 const flipCameraBtn = document.getElementById("flipCamera");
+const readyScreenBtn = document.getElementById("readyScreen");
 
 let filterVisible = true;
 let flipped = false;
+let readyActive = false;
+let readyTimeout = null;
 
 /* =========================
    CAMERA INIT
@@ -19,12 +22,12 @@ navigator.mediaDevices.getUserMedia({
   audio: false
 }).then(stream => {
   video.srcObject = stream;
-}).catch(err => {
+}).catch(() => {
   alert("Camera access denied 😢");
 });
 
 /* =========================
-   SIDEBAR TOGGLE
+   SIDEBAR TOGGLE (MANUAL)
 ========================= */
 
 toggleArrow.addEventListener("click", () => {
@@ -39,6 +42,7 @@ toggleArrow.addEventListener("click", () => {
 toggleFilterBtn.addEventListener("click", () => {
   filterVisible = !filterVisible;
   filter.style.display = filterVisible ? "block" : "none";
+  toggleFilterBtn.classList.toggle("active", filterVisible);
 });
 
 /* =========================
@@ -51,4 +55,30 @@ flipCameraBtn.addEventListener("click", () => {
   const scale = flipped ? "scaleX(-1)" : "scaleX(1)";
   video.style.transform = scale;
   filter.style.transform = scale;
+
+  flipCameraBtn.classList.toggle("active", flipped);
+});
+
+/* =========================
+   READY FOR SCREEN (10s)
+========================= */
+
+readyScreenBtn.addEventListener("click", () => {
+  if (readyActive) return;
+
+  readyActive = true;
+  readyScreenBtn.classList.add("active");
+
+  sidebar.classList.remove("open");
+  toggleArrow.textContent = "❯";
+
+  clearTimeout(readyTimeout);
+
+  readyTimeout = setTimeout(() => {
+    sidebar.classList.add("open");
+    toggleArrow.textContent = "❮";
+
+    readyActive = false;
+    readyScreenBtn.classList.remove("active");
+  }, 10000);
 });
