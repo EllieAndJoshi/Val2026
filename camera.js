@@ -23,7 +23,7 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   video.srcObject = stream;
 }).catch(() => {
-  alert("Camera access denied 😢");
+  alert("Camera access denied !");
 });
 
 /* =========================
