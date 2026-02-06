@@ -7,6 +7,7 @@ const toggleArrow = document.getElementById("sidebar-toggle");
 const toggleFilterBtn = document.getElementById("toggleFilter");
 const flipCameraBtn = document.getElementById("flipCamera");
 const readyScreenBtn = document.getElementById("readyScreen");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
 let filterVisible = true;
 let flipped = false;
@@ -23,11 +24,22 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   video.srcObject = stream;
 }).catch(() => {
-  alert("Camera access denied !");
+  alert("Camera access denied 😢");
 });
 
 /* =========================
-   SIDEBAR TOGGLE (MANUAL)
+   LOAD DEFAULT FILTER
+========================= */
+
+function loadFilter(filename) {
+  // cache busting
+  filter.src = `assets/filters/${filename}?v=${Date.now()}`;
+}
+
+loadFilter("filter1.png");
+
+/* =========================
+   SIDEBAR TOGGLE
 ========================= */
 
 toggleArrow.addEventListener("click", () => {
@@ -36,7 +48,7 @@ toggleArrow.addEventListener("click", () => {
 });
 
 /* =========================
-   FILTER TOGGLE
+   FILTER VISIBILITY
 ========================= */
 
 toggleFilterBtn.addEventListener("click", () => {
@@ -46,21 +58,34 @@ toggleFilterBtn.addEventListener("click", () => {
 });
 
 /* =========================
-   FLIP CAMERA
+   FILTER SWITCHING
+========================= */
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const file = btn.dataset.filter;
+    loadFilter(file);
+  });
+});
+
+/* =========================
+   FLIP CAMERA (FILTER LOCKED)
 ========================= */
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
 
-  const scale = flipped ? "scaleX(-1)" : "scaleX(1)";
-  video.style.transform = scale;
-  filter.style.transform = scale;
+  video.style.transform = flipped ? "scaleX(-1)" : "scaleX(1)";
+  // ❌ filter does NOT flip anymore
 
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
 /* =========================
-   READY FOR SCREEN (10s)
+   READY FOR SCREEN
 ========================= */
 
 readyScreenBtn.addEventListener("click", () => {
