@@ -1,296 +1,158 @@
-* {
-  box-sizing: border-box;
-  font-family: "Fredoka", sans-serif;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
 /* =========================
-   BACKGROUND PICTURE WALL
+   GLOBAL
 ========================= */
 
-#picture-wall {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1s ease;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka', sans-serif;
 }
 
-#picture-wall.active {
-  opacity: 0.25;
-}
-
-.picture {
-  position: absolute;
-  width: 220px;
-  border-radius: 16px;
-  box-shadow: 0 14px 40px rgba(0,0,0,0.28);
-  transform: rotate(var(--rot));
+body {
+  overflow-x: hidden;
 }
 
 /* =========================
    MAIN PAGE
 ========================= */
 
-body {
-  background: #f6cbd6;
+.main-page {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  transition: 0.5s;
-}
-
-body.sad {
-  filter: grayscale(40%) brightness(0.8);
-  background: #6b6b6b;
-}
-
-/* =========================
-   MAIN CARD
-========================= */
-
-.card {
-  background: white;
-  padding: 100px;
-  border-radius: 42px;
-  width: 820px;
-  max-width: 94vw;
-  text-align: center;
-  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
-  z-index: 2;
+  background: #ffeef5;
   position: relative;
 }
 
-.icon {
-  width: 170px;
+/* MAIN BOX BIGGER */
+
+.main-box {
+  background: white;
+  padding: 60px 80px;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  width: 90%;
+}
+
+.main-box h1 {
+  font-size: 42px;
   margin-bottom: 40px;
 }
 
-h1 {
-  font-size: 42px;
-  margin-bottom: 60px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-around;
-  gap: 40px;
-}
-
 /* =========================
-   PILL BUTTON — GLOBAL
+   BUTTONS (YES / NO STYLE)
 ========================= */
 
-.pill-btn,
-button {
-  height: 64px;
-  min-width: 160px;
-  padding: 0 48px;
-
-  border-radius: 999px;
+.pill-btn {
   border: none;
-
-  font-size: 26px;
-  font-weight: 500;
+  padding: 18px 50px;
+  border-radius: 999px;
+  font-size: 22px;
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* =========================
-   YES BUTTON
-========================= */
-
-#yesBtn {
-  background: #ff5a8a;
+.yes-btn {
+  background: #ff4f81;
   color: white;
+  margin-right: 20px;
   position: relative;
 }
 
-#yesBtn::before {
-  content: "";
-  position: absolute;
-  inset: -10px;
-  border-radius: inherit;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 215, 0, 0.9),
-    rgba(255, 180, 0, 0.4),
-    transparent 70%
-  );
-  opacity: 0;
-  filter: blur(18px);
-  z-index: -1;
+/* GOLDEN GLOW ON HOVER */
+
+.yes-btn:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+              0 0 60px rgba(255, 215, 0, 0.5);
+  transform: scale(1.05);
 }
 
-#yesBtn:hover {
-  transform: scale(1.1);
+.no-btn {
+  background: #d9d9d9;
+  color: #333;
 }
 
-#yesBtn:hover::before {
-  opacity: 1;
-  animation: glowPulse 1.6s infinite ease-in-out;
-}
-
-@keyframes glowPulse {
-  0% { filter: blur(16px); }
-  50% { filter: blur(26px); }
-  100% { filter: blur(16px); }
-}
-
-/* =========================
-   NO BUTTON
-========================= */
-
-#noBtn {
-  background: #e0e0e0;
-  color: #111;
-}
-
-#noBtn:hover {
-  transform: scale(1.1);
-}
-
-/* =========================
-   CAMERA BUTTON
-========================= */
-
-#cameraBtn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-
-  min-width: 140px;
-  height: 52px;
-
-  background: #ff5a8a;
-  color: white;
-
-  font-size: 20px;
-}
-
-#cameraBtn:hover {
-  transform: scale(1.1);
-}
-
-/* =========================
-   TOP MESSAGE
-========================= */
-
-#top-message {
-  position: fixed;
-  top: 30px;
-  font-size: 40px;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
-  z-index: 3;
-}
-
-#top-message.show {
-  opacity: 1;
-}
-
-/* =========================
-   SAD BUBBLE
-========================= */
-
-#sad-bubble {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2f2f2f;
-  color: white;
-  padding: 26px 36px;
-  border-radius: 36px;
-  font-size: 22px;
-  display: none;
-  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
-  z-index: 3;
+.no-btn:hover {
+  transform: scale(1.05);
 }
 
 /* =========================
    CELEBRATION PAGE
 ========================= */
 
-.celebrate {
+.celebration-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffeef5;
+  overflow: hidden;
+}
+
+.celebration-card {
+  background: white;
+  padding: 70px 100px;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.celebration-card h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   CAMERA PAGE
+========================= */
+
+.camera-page {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+/* CAMERA CONTAINER */
+
+.camera-container {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #f6cbd6;
 }
 
-#confetti {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
+/* VIDEO */
+
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FILTER IMAGE (AUTO SCALE) */
+
+.camera-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* change to cover if your PNG is edge-to-edge */
   pointer-events: none;
 }
 
-.celebration-card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
 /* =========================
-   SIDEBAR
+   SIDEBAR RIGHT
 ========================= */
 
-#sidebar {
-  position: fixed;
-  top: 0;
-  left: -220px;
-  width: 220px;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 6px 0 30px rgba(0,0,0,0.25);
-  padding: 20px;
-  z-index: 5;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: left 0.4s ease;
-}
-
-#sidebar.open {
-  left: 0;
-}
-
-#sidebar-toggle {
-  position: absolute;
-  top: 50%;
-  right: -32px;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 64px;
-  background: #ff5a8a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 16px 16px 0;
-  cursor: pointer;
-  font-size: 22px;
-}
-
-/* Sidebar buttons */
 #sidebar {
   position: fixed;
   top: 0;
@@ -302,6 +164,9 @@ button {
   box-shadow: -4px 0 20px rgba(0,0,0,0.2);
   transition: right 0.4s ease;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 #sidebar.open {
@@ -320,81 +185,36 @@ button {
   font-weight: bold;
 }
 
+/* =========================
+   SIDEBAR BUTTONS
+========================= */
+
 .sidebar-btn {
   background: #e0e0e0;
   color: #333;
-  border: none;
-  border-radius: 36px;
-  height: 48px;
   font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 12px 20px;
 }
 
+.sidebar-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ACTIVE = PINK */
+
 .sidebar-btn.active {
-  background: #ff5a8a;
+  background: #ff4f81;
   color: white;
 }
 
-.sidebar-btn:hover {
-  transform: scale(1.05);
-}
-
 .filter-title {
-  margin-top: 10px;
   font-weight: 600;
-  text-align: center;
-}
-
-
-/* Button hover */
-.sidebar-btn:hover {
-  transform: scale(1.05);
-}
-
-/* Prevent hover during ready mode */
-#readyScreen.active:hover {
-  transform: none;
+  margin-top: 10px;
 }
 
 /* =========================
-   CAMERA PAGE 
+   COUNTDOWN
 ========================= */
-
-.camera-page {
-  margin: 0;
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  font-family: "Fredoka", sans-serif;
-}
-
-.camera-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Video */
-.camera-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-/* Filter fills entire frame */
-.camera-filter {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-/* COUNTDOWN */
 
 .countdown {
   position: absolute;
@@ -408,4 +228,26 @@ button {
   text-shadow: 0 0 40px rgba(0,0,0,0.8);
   z-index: 5;
   pointer-events: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .main-box {
+    padding: 40px 30px;
+  }
+
+  .celebration-card {
+    padding: 40px;
+  }
+
+  .celebration-card h1 {
+    font-size: 40px;
+  }
+
+  .countdown {
+    font-size: 120px;
+  }
 }
