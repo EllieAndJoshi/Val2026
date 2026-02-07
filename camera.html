@@ -10,9 +10,9 @@
 
 <body class="camera-page">
 
-  <!-- Sidebar -->
-  <div id="sidebar" class="open">
-    <div id="sidebar-toggle">❮</div>
+  <!-- Sidebar RIGHT -->
+  <div id="sidebar" class="open right">
+    <div id="sidebar-toggle">❯</div>
 
     <button id="toggleFilter" class="pill-btn sidebar-btn active">
       Toggle filter
@@ -42,13 +42,8 @@
   <!-- Camera -->
   <div class="camera-container">
     <video id="video" autoplay playsinline></video>
-
     <img id="cameraFilter" class="camera-filter" alt="filter">
-
-    <!-- Capture button now INSIDE camera container -->
-    <button id="captureBtn" class="capture-overlay">
-      click
-    </button>
+    <div id="countdown" class="countdown"></div>
   </div>
 
   <script src="camera.js"></script>

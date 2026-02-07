@@ -294,39 +294,30 @@ button {
 #sidebar {
   position: fixed;
   top: 0;
-  left: -220px;
-  width: 220px;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 6px 0 30px rgba(0,0,0,0.25);
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background: rgba(255,255,255,0.95);
   padding: 20px;
-  z-index: 5;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: left 0.4s ease;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  transition: right 0.4s ease;
+  z-index: 10;
 }
 
 #sidebar.open {
-  left: 0;
+  right: 0;
 }
 
 #sidebar-toggle {
   position: absolute;
-  top: 50%;
-  right: -32px;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 64px;
-  background: #ff5a8a;
+  left: -35px;
+  top: 20px;
+  background: #ff4f81;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 16px 16px 0;
+  padding: 8px 10px;
+  border-radius: 20px 0 0 20px;
   cursor: pointer;
-  font-size: 22px;
+  font-weight: bold;
 }
 
 .sidebar-btn {
@@ -355,31 +346,6 @@ button {
   text-align: center;
 }
 
-
-
-
-.capture-overlay {
-  position: absolute;
-  bottom: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: none;
-  background: white;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 4;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.capture-overlay:hover {
-  transform: translateX(-50%) scale(1.1);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-}
 
 /* Button hover */
 .sidebar-btn:hover {
@@ -425,5 +391,21 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+}
+
+/* COUNTDOWN */
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 180px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 0 40px rgba(0,0,0,0.8);
+  z-index: 5;
   pointer-events: none;
 }

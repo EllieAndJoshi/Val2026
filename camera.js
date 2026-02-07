@@ -8,7 +8,7 @@ const toggleFilterBtn = document.getElementById("toggleFilter");
 const flipCameraBtn = document.getElementById("flipCamera");
 const readyPicBtn = document.getElementById("readyPic");
 const filterButtons = document.querySelectorAll(".filter-btn");
-const captureBtn = document.getElementById("captureBtn");
+const countdownEl = document.getElementById("countdown");
 
 let filterVisible = true;
 let flipped = false;
@@ -34,11 +34,16 @@ function loadFilter(filename) {
 
 loadFilter("filter1.png");
 
-/* SIDEBAR */
+/* SIDEBAR TOGGLE */
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  toggleArrow.textContent = sidebar.classList.contains("open") ? "❮" : "❯";
+
+  if (sidebar.classList.contains("open")) {
+    toggleArrow.textContent = "❯";
+  } else {
+    toggleArrow.textContent = "❮";
+  }
 });
 
 /* TOGGLE FILTER */
@@ -76,21 +81,36 @@ readyPicBtn.addEventListener("click", () => {
   readyPicBtn.classList.add("active");
 
   sidebar.classList.remove("open");
-  toggleArrow.textContent = "❯";
+  toggleArrow.textContent = "❮";
 
-  clearTimeout(readyTimeout);
-
-  readyTimeout = setTimeout(() => {
-    sidebar.classList.add("open");
-    toggleArrow.textContent = "❮";
-    readyActive = false;
-    readyPicBtn.classList.remove("active");
-  }, 10000);
+  startCountdown(5);
 });
 
-/* CAPTURE */
+/* COUNTDOWN FUNCTION */
 
-captureBtn.addEventListener("click", () => {
+function startCountdown(seconds) {
+  let current = seconds;
+
+  countdownEl.style.display = "flex";
+  countdownEl.textContent = current;
+
+  const interval = setInterval(() => {
+    current--;
+
+    if (current > 0) {
+      countdownEl.textContent = current;
+    } else {
+      clearInterval(interval);
+      countdownEl.style.display = "none";
+      takePhoto();
+      restoreSidebar();
+    }
+  }, 1000);
+}
+
+/* TAKE PHOTO */
+
+function takePhoto() {
   const canvas = document.createElement("canvas");
   const w = video.videoWidth;
   const h = video.videoHeight;
@@ -116,4 +136,15 @@ captureBtn.addEventListener("click", () => {
   link.download = `valentine-photo-${Date.now()}.png`;
   link.href = canvas.toDataURL("image/png");
   link.click();
-});
+}
+
+/* RESTORE SIDEBAR */
+
+function restoreSidebar() {
+  setTimeout(() => {
+    sidebar.classList.add("open");
+    toggleArrow.textContent = "❯";
+    readyPicBtn.classList.remove("active");
+    readyActive = false;
+  }, 1000);
+}
