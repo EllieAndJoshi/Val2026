@@ -1,3 +1,34 @@
+/* =========================
+   LOGIN LOGIC
+========================= */
+
+const loginBtn = document.getElementById("loginBtn");
+const nameInput = document.getElementById("nameInput");
+const loginMessage = document.getElementById("loginMessage");
+const loginScreen = document.getElementById("login-screen");
+const mainContent = document.getElementById("main-content");
+
+loginBtn.addEventListener("click", checkLogin);
+nameInput.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") checkLogin();
+});
+
+function checkLogin() {
+  const name = nameInput.value.trim().toLowerCase();
+
+  if (name === "elena") {
+    document.title = "Will you be my Valentine? 💖";
+    loginScreen.style.display = "none";
+    mainContent.style.display = "block";
+  } else {
+    loginMessage.textContent = "You ain't her sorry :))";
+  }
+}
+
+/* =========================
+   MAIN PAGE LOGIC
+========================= */
+
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const sadBubble = document.getElementById("sad-bubble");
@@ -6,10 +37,10 @@ const topMessage = document.getElementById("top-message");
 const pictureWall = document.getElementById("picture-wall");
 
 const messages = [
-  "Are you sure?",
-  "Are you REALLY sure???",
-  "I think this might be an error",
-  "That button feels wrong…"
+  "T'es sure?",
+  "T'es vraiment sure???",
+  "Attends vraiment?!",
+  "Bon bah tant pis hein..."
 ];
 
 let msgIndex = 0;
@@ -50,51 +81,45 @@ function hidePictureWall() {
   pictureWall.classList.remove("active");
 }
 
-yesBtn.addEventListener("mouseenter", () => {
+yesBtn?.addEventListener("mouseenter", () => {
   clearTimeout(hideWallTimer);
-
-  yesHoverTimer = setTimeout(() => {
-    showPictureWall();
-  }, 5000);
+  yesHoverTimer = setTimeout(showPictureWall, 5000);
 });
 
-yesBtn.addEventListener("mouseleave", () => {
+yesBtn?.addEventListener("mouseleave", () => {
   clearTimeout(yesHoverTimer);
-
-  hideWallTimer = setTimeout(() => {
-    hidePictureWall();
-  }, 5000);
+  hideWallTimer = setTimeout(hidePictureWall, 5000);
 });
 
 /* =========================
    YES CLICK
 ========================= */
 
-yesBtn.addEventListener("click", () => {
+yesBtn?.addEventListener("click", () => {
   window.open("celebration.html", "_blank");
 });
 
 /* =========================
-   NO BUTTON LOGIC (UNCHANGED)
+   NO BUTTON LOGIC
 ========================= */
 
-noBtn.addEventListener("mouseenter", () => {
+noBtn?.addEventListener("mouseenter", () => {
   document.body.classList.add("sad");
   sadBubble.style.display = "block";
   bubbleText.textContent = messages[msgIndex];
   msgIndex = (msgIndex + 1) % messages.length;
 });
 
-noBtn.addEventListener("mouseleave", () => {
+noBtn?.addEventListener("mouseleave", () => {
   document.body.classList.remove("sad");
   sadBubble.style.display = "none";
 });
 
-noBtn.addEventListener("click", () => {
+noBtn?.addEventListener("click", () => {
   document.body.classList.remove("sad");
   sadBubble.style.display = "none";
 
-  topMessage.textContent = "Nothing happened, let's restart 💔";
+  topMessage.textContent = "On va faire comme si j'avais pas vu...";
   topMessage.classList.add("show");
 
   setTimeout(() => {
