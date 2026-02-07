@@ -121,12 +121,11 @@ captureBtn.addEventListener("click", () => {
     ctx.translate(w, 0);
     ctx.scale(-1, 1);
   }
-  ctx.drawImage(video, 0, 0, w, h);
 
-  // reset transform
+  ctx.drawImage(video, 0, 0, w, h);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  // draw filter
+  // draw filter (always scaled to full frame)
   if (filterVisible) {
     ctx.drawImage(filter, 0, 0, w, h);
   }
