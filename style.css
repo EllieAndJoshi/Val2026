@@ -266,7 +266,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 14px;
-
   transition: left 0.4s ease;
 }
 
@@ -292,7 +291,8 @@ button {
 }
 
 /* Sidebar buttons */
-.sidebar-btn {
+.sidebar-btn,
+.capture-btn {
   background: #e0e0e0;
   color: #333;
   border: none;
@@ -303,13 +303,24 @@ button {
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.sidebar-btn.active {
+.sidebar-btn.active,
+.capture-btn {
   background: #ff5a8a;
   color: white;
 }
 
-.sidebar-btn:hover {
+.sidebar-btn:hover,
+.capture-btn:hover {
   transform: scale(1.05);
+}
+
+/* Capture button */
+.capture-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 0 36px;
+  z-index: 6;
 }
 
 .filter-title {
@@ -329,7 +340,7 @@ button {
 }
 
 /* =========================
-   CAMERA PAGE — RESPONSIVE
+   CAMERA PAGE 
 ========================= */
 
 .camera-page {
@@ -347,7 +358,7 @@ button {
   height: 100%;
 }
 
-/* Camera */
+/* Video */
 .camera-container video {
   width: 100%;
   height: 100%;
@@ -355,7 +366,7 @@ button {
   transition: transform 0.4s ease;
 }
 
-/* Filter overlay */
+/* Filter */
 .camera-filter {
   position: absolute;
   inset: 0;

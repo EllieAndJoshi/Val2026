@@ -6,8 +6,9 @@ const toggleArrow = document.getElementById("sidebar-toggle");
 
 const toggleFilterBtn = document.getElementById("toggleFilter");
 const flipCameraBtn = document.getElementById("flipCamera");
-const readyScreenBtn = document.getElementById("readyScreen");
+const readyPicBtn = document.getElementById("readyPic");
 const filterButtons = document.querySelectorAll(".filter-btn");
+const captureBtn = document.getElementById("captureBtn");
 
 let filterVisible = true;
 let flipped = false;
@@ -28,11 +29,10 @@ navigator.mediaDevices.getUserMedia({
 });
 
 /* =========================
-   LOAD DEFAULT FILTER
+   FILTER LOADING
 ========================= */
 
 function loadFilter(filename) {
-  // cache busting
   filter.src = `assets/filters/${filename}?v=${Date.now()}`;
 }
 
@@ -65,9 +65,7 @@ filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     filterButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-
-    const file = btn.dataset.filter;
-    loadFilter(file);
+    loadFilter(btn.dataset.filter);
   });
 });
 
@@ -77,22 +75,19 @@ filterButtons.forEach(btn => {
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
-
   video.style.transform = flipped ? "scaleX(-1)" : "scaleX(1)";
-  // ❌ filter does NOT flip anymore
-
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
 /* =========================
-   READY FOR SCREEN
+   READY FOR PIC
 ========================= */
 
-readyScreenBtn.addEventListener("click", () => {
+readyPicBtn.addEventListener("click", () => {
   if (readyActive) return;
 
   readyActive = true;
-  readyScreenBtn.classList.add("active");
+  readyPicBtn.classList.add("active");
 
   sidebar.classList.remove("open");
   toggleArrow.textContent = "❯";
@@ -102,8 +97,42 @@ readyScreenBtn.addEventListener("click", () => {
   readyTimeout = setTimeout(() => {
     sidebar.classList.add("open");
     toggleArrow.textContent = "❮";
-
     readyActive = false;
-    readyScreenBtn.classList.remove("active");
+    readyPicBtn.classList.remove("active");
   }, 10000);
+});
+
+/* =========================
+   CAPTURE PHOTO
+========================= */
+
+captureBtn.addEventListener("click", () => {
+  const canvas = document.createElement("canvas");
+  const w = video.videoWidth;
+  const h = video.videoHeight;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  const ctx = canvas.getContext("2d");
+
+  // draw video (handle flip)
+  if (flipped) {
+    ctx.translate(w, 0);
+    ctx.scale(-1, 1);
+  }
+  ctx.drawImage(video, 0, 0, w, h);
+
+  // reset transform
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+  // draw filter
+  if (filterVisible) {
+    ctx.drawImage(filter, 0, 0, w, h);
+  }
+
+  const link = document.createElement("a");
+  link.download = `valentine-photo-${Date.now()}.png`;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
 });

@@ -22,8 +22,8 @@
       Flip camera
     </button>
 
-    <button id="readyScreen" class="pill-btn sidebar-btn">
-      Ready for screen
+    <button id="readyPic" class="pill-btn sidebar-btn">
+      Ready for pic
     </button>
 
     <hr>
@@ -31,28 +31,24 @@
     <div class="filter-title">Filters</div>
 
     <button class="pill-btn sidebar-btn filter-btn active" data-filter="filter1.png">
-      Filter 1
+      Landscape
     </button>
 
     <button class="pill-btn sidebar-btn filter-btn" data-filter="filter2.png">
-      Filter 2
-    </button>
-
-    <button class="pill-btn sidebar-btn filter-btn" data-filter="filter3.png">
-      Filter 3
+      Portrait
     </button>
   </div>
 
   <!-- Camera -->
   <div class="camera-container">
     <video id="video" autoplay playsinline></video>
-
-    <img
-      id="cameraFilter"
-      class="camera-filter"
-      alt="filter"
-    >
+    <img id="cameraFilter" class="camera-filter" alt="filter">
   </div>
+
+  <!-- Capture button -->
+  <button id="captureBtn" class="pill-btn capture-btn">
+    Capture
+  </button>
 
   <script src="camera.js"></script>
 </body>
