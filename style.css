@@ -1,236 +1,35 @@
-/* =========================
-   GLOBAL
-========================= */
-
 * {
+  box-sizing: border-box;
+  font-family: "Fredoka", sans-serif;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Fredoka', sans-serif;
+  height: 100%;
 }
+
+/* =========================
+   GLOBAL BACKGROUND
+========================= */
 
 body {
-  overflow-x: hidden;
-}
-
-/* =========================
-   MAIN PAGE
-========================= */
-
-.main-page {
   background: #f6cbd6;
+  transition: 0.5s;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-/* MAIN BOX BIGGER */
-
-.main-box {
-  background: white;
-  padding: 60px 80px;
-  border-radius: 40px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  width: 90%;
-}
-
-.main-box h1 {
-  font-size: 42px;
-  margin-bottom: 40px;
+/* Sad mode */
+body.sad {
+  filter: grayscale(40%) brightness(0.8);
+  background: #6b6b6b;
 }
 
 /* =========================
-   BUTTONS (YES / NO STYLE)
-========================= */
-
-.pill-btn {
-  border: none;
-  padding: 18px 50px;
-  border-radius: 999px;
-  font-size: 22px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.yes-btn {
-  background: #ff4f81;
-  color: white;
-  margin-right: 20px;
-  position: relative;
-}
-
-/* GOLDEN GLOW ON HOVER */
-
-.yes-btn:hover {
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
-              0 0 60px rgba(255, 215, 0, 0.5);
-  transform: scale(1.05);
-}
-
-.no-btn {
-  background: #d9d9d9;
-  color: #333;
-}
-
-.no-btn:hover {
-  transform: scale(1.05);
-}
-
-/* =========================
-   CELEBRATION PAGE
-========================= */
-
-.celebration-page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffeef5;
-  overflow: hidden;
-}
-
-.celebration-card {
-  background: white;
-  padding: 70px 100px;
-  border-radius: 40px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-.celebration-card h1 {
-  font-size: 60px;
-  margin-bottom: 20px;
-}
-
-/* =========================
-   CAMERA PAGE
-========================= */
-
-.camera-page {
-  margin: 0;
-  background: black;
-  overflow: hidden;
-}
-
-/* CAMERA CONTAINER */
-
-.camera-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* VIDEO */
-
-#video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* FILTER IMAGE (AUTO SCALE) */
-
-.camera-filter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* change to cover if your PNG is edge-to-edge */
-  pointer-events: none;
-}
-
-/* =========================
-   SIDEBAR RIGHT
-========================= */
-
-#sidebar {
-  position: fixed;
-  top: 0;
-  right: -260px;
-  width: 260px;
-  height: 100%;
-  background: rgba(255,255,255,0.95);
-  padding: 20px;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-  transition: right 0.4s ease;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-#sidebar.open {
-  right: 0;
-}
-
-#sidebar-toggle {
-  position: absolute;
-  left: -35px;
-  top: 20px;
-  background: #ff4f81;
-  color: white;
-  padding: 8px 10px;
-  border-radius: 20px 0 0 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* =========================
-   SIDEBAR BUTTONS
-========================= */
-
-.sidebar-btn {
-  background: #e0e0e0;
-  color: #333;
-  font-size: 16px;
-  padding: 12px 20px;
-}
-
-.sidebar-btn:hover {
-  transform: scale(1.05);
-}
-
-/* ACTIVE = PINK */
-
-.sidebar-btn.active {
-  background: #ff4f81;
-  color: white;
-}
-
-.filter-title {
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-/* =========================
-   COUNTDOWN
-========================= */
-
-.countdown {
-  position: absolute;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 180px;
-  font-weight: 600;
-  color: white;
-  text-shadow: 0 0 40px rgba(0,0,0,0.8);
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* =========================
-   LOGIN
+   LOGIN SCREEN
 ========================= */
 
 #login-screen {
@@ -262,36 +61,276 @@ body {
 }
 
 /* =========================
-   MAIN
+   MAIN CONTENT WRAPPER
 ========================= */
 
-
 #main-content {
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 /* =========================
-   RESPONSIVE
+   CARD (MAIN + CELEBRATION)
 ========================= */
 
-@media (max-width: 768px) {
-  .main-box {
-    padding: 40px 30px;
-  }
+.main-box,
+.card {
+  background: white;
+  padding: 70px;
+  border-radius: 36px;
+  width: 720px;
+  max-width: 92vw;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+  position: relative;
+  z-index: 2;
+}
 
-  .celebration-card {
-    padding: 40px;
-  }
+/* Smaller GIF */
+.icon {
+  width: 110px;
+  margin-bottom: 25px;
+}
 
-  .celebration-card h1 {
-    font-size: 40px;
-  }
+/* Celebration card centered */
+.celebration-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
 
-  .countdown {
-    font-size: 120px;
-  }
+/* =========================
+   TITLE
+========================= */
+
+h1 {
+  font-size: 34px;
+  margin-bottom: 45px;
+}
+
+/* =========================
+   BUTTONS (ALL PILL STYLE)
+========================= */
+
+.pill-btn {
+  padding: 18px 50px;
+  border-radius: 40px;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 10px;
+}
+
+.yes-btn {
+  background: #ff5a8a;
+  color: white;
+  position: relative;
+}
+
+.yes-btn:hover {
+  transform: scale(1.08);
+  animation: yesGlow 1.5s infinite;
+}
+
+@keyframes yesGlow {
+  0% { box-shadow: 0 0 0px rgba(255,215,0,0); }
+  50% { box-shadow: 0 0 25px 10px rgba(255,215,0,0.7); }
+  100% { box-shadow: 0 0 0px rgba(255,215,0,0); }
+}
+
+.no-btn {
+  background: #d6d6d6;
+}
+
+.no-btn:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   TOP MESSAGE
+========================= */
+
+#top-message {
+  position: fixed;
+  top: 30px;
+  font-size: 36px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 3;
+}
+
+#top-message.show {
+  opacity: 1;
+}
+
+/* =========================
+   SAD BUBBLE
+========================= */
+
+#sad-bubble {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2f2f2f;
+  color: white;
+  padding: 22px 32px;
+  border-radius: 32px;
+  font-size: 20px;
+  display: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  animation: pop 0.3s ease;
+  z-index: 3;
+}
+
+#sad-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 14px solid #2f2f2f;
+}
+
+@keyframes pop {
+  from { transform: translateX(-50%) scale(0.9); }
+  to   { transform: translateX(-50%) scale(1); }
+}
+
+/* =========================
+   PICTURE WALL
+========================= */
+
+#picture-wall {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#picture-wall.active {
+  opacity: 0.25;
+}
+
+.picture {
+  position: absolute;
+  width: 200px;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+  transform: rotate(var(--rot));
+}
+
+/* =========================
+   CELEBRATION PAGE
+========================= */
+
+.celebrate {
+  background: #f6cbd6;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =========================
+   CAMERA PAGE
+========================= */
+
+.camera-body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  position: relative;
+}
+
+#videoElement {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+}
+
+#filterOverlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* =========================
+   RIGHT SIDEBAR
+========================= */
+
+#sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background: white;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+  padding: 25px;
+  z-index: 3;
+  transition: transform 0.4s ease;
+}
+
+#sidebar.hidden {
+  transform: translateX(100%);
+}
+
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  background: #e0e0e0;
+  transition: 0.3s;
+}
+
+.sidebar-btn.active {
+  background: #ff5a8a;
+  color: white;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+#countdown {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+  font-weight: bold;
+  color: white;
+  z-index: 5;
+  pointer-events: none;
 }
