@@ -15,9 +15,7 @@ let flipped = false;
 let readyActive = false;
 let readyTimeout = null;
 
-/* =========================
-   CAMERA INIT
-========================= */
+/* CAMERA INIT */
 
 navigator.mediaDevices.getUserMedia({
   video: { facingMode: "user" },
@@ -28,9 +26,7 @@ navigator.mediaDevices.getUserMedia({
   alert("Camera access denied 😢");
 });
 
-/* =========================
-   FILTER LOADING
-========================= */
+/* LOAD FILTER */
 
 function loadFilter(filename) {
   filter.src = `assets/filters/${filename}?v=${Date.now()}`;
@@ -38,18 +34,14 @@ function loadFilter(filename) {
 
 loadFilter("filter1.png");
 
-/* =========================
-   SIDEBAR TOGGLE
-========================= */
+/* SIDEBAR */
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   toggleArrow.textContent = sidebar.classList.contains("open") ? "❮" : "❯";
 });
 
-/* =========================
-   FILTER VISIBILITY
-========================= */
+/* TOGGLE FILTER */
 
 toggleFilterBtn.addEventListener("click", () => {
   filterVisible = !filterVisible;
@@ -57,9 +49,7 @@ toggleFilterBtn.addEventListener("click", () => {
   toggleFilterBtn.classList.toggle("active", filterVisible);
 });
 
-/* =========================
-   FILTER SWITCHING
-========================= */
+/* SWITCH FILTER */
 
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -69,9 +59,7 @@ filterButtons.forEach(btn => {
   });
 });
 
-/* =========================
-   FLIP CAMERA (FILTER LOCKED)
-========================= */
+/* FLIP CAMERA (FILTER LOCKED) */
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
@@ -79,9 +67,7 @@ flipCameraBtn.addEventListener("click", () => {
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
-/* =========================
-   READY FOR PIC
-========================= */
+/* READY FOR PIC */
 
 readyPicBtn.addEventListener("click", () => {
   if (readyActive) return;
@@ -102,9 +88,7 @@ readyPicBtn.addEventListener("click", () => {
   }, 10000);
 });
 
-/* =========================
-   CAPTURE PHOTO
-========================= */
+/* CAPTURE */
 
 captureBtn.addEventListener("click", () => {
   const canvas = document.createElement("canvas");
@@ -116,7 +100,6 @@ captureBtn.addEventListener("click", () => {
 
   const ctx = canvas.getContext("2d");
 
-  // draw video (handle flip)
   if (flipped) {
     ctx.translate(w, 0);
     ctx.scale(-1, 1);
@@ -125,7 +108,6 @@ captureBtn.addEventListener("click", () => {
   ctx.drawImage(video, 0, 0, w, h);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  // draw filter (always scaled to full frame)
   if (filterVisible) {
     ctx.drawImage(filter, 0, 0, w, h);
   }

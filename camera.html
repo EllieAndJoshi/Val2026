@@ -42,13 +42,14 @@
   <!-- Camera -->
   <div class="camera-container">
     <video id="video" autoplay playsinline></video>
-    <img id="cameraFilter" class="camera-filter" alt="filter">
-  </div>
 
-  <!-- Round Capture Button -->
-  <button id="captureBtn" class="capture-circle">
-    click
-  </button>
+    <img id="cameraFilter" class="camera-filter" alt="filter">
+
+    <!-- Capture button now INSIDE camera container -->
+    <button id="captureBtn" class="capture-overlay">
+      click
+    </button>
+  </div>
 
   <script src="camera.js"></script>
 </body>

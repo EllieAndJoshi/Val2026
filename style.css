@@ -355,29 +355,30 @@ button {
   text-align: center;
 }
 
-/* =========================
-   ROUND CAPTURE BUTTON
-========================= */
 
-.capture-circle {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 90px;
-  height: 90px;
+
+
+.capture-overlay {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  background: white;
   border: none;
-  font-size: 18px;
+  background: white;
+  font-size: 20px;
   font-weight: 600;
   cursor: pointer;
-  z-index: 6;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  transition: transform 0.2s ease;
+  z-index: 4;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.capture-circle:hover {
-  transform: scale(1.1);
+.capture-overlay:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
 
 /* Button hover */
@@ -409,7 +410,7 @@ button {
   height: 100%;
 }
 
-/* Video scales with window */
+/* Video */
 .camera-container video {
   width: 100%;
   height: 100%;
@@ -417,12 +418,12 @@ button {
   transition: transform 0.4s ease;
 }
 
-/* Filter now fills entire frame dynamically */
+/* Filter fills entire frame */
 .camera-filter {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* IMPORTANT change */
+  object-fit: cover;
   pointer-events: none;
 }
