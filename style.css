@@ -6,148 +6,180 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 /* =========================
-   GLOBAL BACKGROUND
+   BACKGROUND PICTURE WALL
+========================= */
+
+#picture-wall {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#picture-wall.active {
+  opacity: 0.25;
+}
+
+.picture {
+  position: absolute;
+  width: 220px;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+  transform: rotate(var(--rot));
+}
+
+/* =========================
+   MAIN PAGE
 ========================= */
 
 body {
   background: #f6cbd6;
-  transition: 0.5s;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  transition: 0.5s;
 }
 
-/* Sad mode */
 body.sad {
   filter: grayscale(40%) brightness(0.8);
   background: #6b6b6b;
 }
 
 /* =========================
-   LOGIN SCREEN
+   MAIN CARD
 ========================= */
 
-#login-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-#login-screen input {
-  padding: 14px 20px;
-  font-size: 18px;
-  border-radius: 30px;
-  border: 2px solid #ff4f81;
-  outline: none;
-  width: 250px;
-  text-align: center;
-}
-
-#login-screen input:focus {
-  box-shadow: 0 0 10px rgba(255, 79, 129, 0.5);
-}
-
-#loginMessage {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #ff4f81;
-}
-
-/* =========================
-   MAIN CONTENT WRAPPER
-========================= */
-
-#main-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-/* =========================
-   CARD (MAIN + CELEBRATION)
-========================= */
-
-.main-box,
 .card {
   background: white;
-  padding: 70px;
-  border-radius: 36px;
-  width: 720px;
-  max-width: 92vw;
+  padding: 100px;
+  border-radius: 42px;
+  width: 820px;
+  max-width: 94vw;
   text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
+  z-index: 2;
   position: relative;
-  z-index: 2;
 }
 
-/* Smaller GIF */
 .icon {
-  width: 110px;
-  margin-bottom: 25px;
+  width: 170px;
+  margin-bottom: 40px;
 }
-
-/* Celebration card centered */
-.celebration-card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-/* =========================
-   TITLE
-========================= */
 
 h1 {
-  font-size: 34px;
-  margin-bottom: 45px;
+  font-size: 42px;
+  margin-bottom: 60px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
 }
 
 /* =========================
-   BUTTONS (ALL PILL STYLE)
+   PILL BUTTON — GLOBAL
 ========================= */
 
-.pill-btn {
-  padding: 18px 50px;
-  border-radius: 40px;
+.pill-btn,
+button {
+  height: 64px;
+  min-width: 160px;
+  padding: 0 48px;
+
+  border-radius: 999px;
   border: none;
-  font-size: 24px;
+
+  font-size: 26px;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.3s ease;
-  margin: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.yes-btn {
+/* =========================
+   YES BUTTON
+========================= */
+
+#yesBtn {
   background: #ff5a8a;
   color: white;
   position: relative;
 }
 
-.yes-btn:hover {
-  transform: scale(1.08);
-  animation: yesGlow 1.5s infinite;
+#yesBtn::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 215, 0, 0.9),
+    rgba(255, 180, 0, 0.4),
+    transparent 70%
+  );
+  opacity: 0;
+  filter: blur(18px);
+  z-index: -1;
 }
 
-@keyframes yesGlow {
-  0% { box-shadow: 0 0 0px rgba(255,215,0,0); }
-  50% { box-shadow: 0 0 25px 10px rgba(255,215,0,0.7); }
-  100% { box-shadow: 0 0 0px rgba(255,215,0,0); }
+#yesBtn:hover {
+  transform: scale(1.1);
 }
 
-.no-btn {
-  background: #d6d6d6;
+#yesBtn:hover::before {
+  opacity: 1;
+  animation: glowPulse 1.6s infinite ease-in-out;
 }
 
-.no-btn:hover {
+@keyframes glowPulse {
+  0% { filter: blur(16px); }
+  50% { filter: blur(26px); }
+  100% { filter: blur(16px); }
+}
+
+/* =========================
+   NO BUTTON
+========================= */
+
+#noBtn {
+  background: #e0e0e0;
+  color: #111;
+}
+
+#noBtn:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   CAMERA BUTTON
+========================= */
+
+#cameraBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  min-width: 140px;
+  height: 52px;
+
+  background: #ff5a8a;
+  color: white;
+
+  font-size: 20px;
+}
+
+#cameraBtn:hover {
   transform: scale(1.1);
 }
 
@@ -158,7 +190,7 @@ h1 {
 #top-message {
   position: fixed;
   top: 30px;
-  font-size: 36px;
+  font-size: 40px;
   color: white;
   opacity: 0;
   transition: opacity 0.5s;
@@ -181,54 +213,12 @@ h1 {
   transform: translateX(-50%);
   background: #2f2f2f;
   color: white;
-  padding: 22px 32px;
-  border-radius: 32px;
-  font-size: 20px;
+  padding: 26px 36px;
+  border-radius: 36px;
+  font-size: 22px;
   display: none;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  animation: pop 0.3s ease;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
   z-index: 3;
-}
-
-#sad-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 14px solid #2f2f2f;
-}
-
-@keyframes pop {
-  from { transform: translateX(-50%) scale(0.9); }
-  to   { transform: translateX(-50%) scale(1); }
-}
-
-/* =========================
-   PICTURE WALL
-========================= */
-
-#picture-wall {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-#picture-wall.active {
-  opacity: 0.25;
-}
-
-.picture {
-  position: absolute;
-  width: 200px;
-  border-radius: 14px;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-  transform: rotate(var(--rot));
 }
 
 /* =========================
@@ -236,10 +226,11 @@ h1 {
 ========================= */
 
 .celebrate {
-  background: #f6cbd6;
-  height: 100vh;
+  position: relative;
   width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  background: #f6cbd6;
 }
 
 #confetti {
@@ -249,68 +240,95 @@ h1 {
   pointer-events: none;
 }
 
-/* =========================
-   CAMERA PAGE
-========================= */
-
-.camera-body {
-  margin: 0;
-  background: black;
-  overflow: hidden;
-  position: relative;
-}
-
-#videoElement {
+.celebration-card {
   position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 1;
-}
-
-#filterOverlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
 
 /* =========================
-   RIGHT SIDEBAR
+   SIDEBAR
 ========================= */
 
 #sidebar {
   position: fixed;
-  right: 0;
   top: 0;
-  width: 260px;
+  left: -220px;
+  width: 220px;
   height: 100vh;
-  background: white;
-  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-  padding: 25px;
-  z-index: 3;
-  transition: transform 0.4s ease;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 6px 0 30px rgba(0,0,0,0.25);
+  padding: 20px;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: left 0.4s ease;
 }
 
-#sidebar.hidden {
-  transform: translateX(100%);
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar-toggle {
+  position: absolute;
+  top: 50%;
+  right: -32px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 64px;
+  background: #ff5a8a;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 16px 16px 0;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Sidebar buttons */
+#sidebar {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  transition: right 0.4s ease;
+  z-index: 10;
+}
+
+#sidebar.open {
+  right: 0;
+}
+
+#sidebar-toggle {
+  position: absolute;
+  left: -35px;
+  top: 20px;
+  background: #ff4f81;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 20px 0 0 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .sidebar-btn {
-  display: block;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 14px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
   background: #e0e0e0;
-  transition: 0.3s;
+  color: #333;
+  border: none;
+  border-radius: 36px;
+  height: 48px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .sidebar-btn.active {
@@ -318,19 +336,76 @@ h1 {
   color: white;
 }
 
+.sidebar-btn:hover {
+  transform: scale(1.05);
+}
+
+.filter-title {
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* Button hover */
+.sidebar-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Prevent hover during ready mode */
+#readyScreen.active:hover {
+  transform: none;
+}
+
 /* =========================
-   COUNTDOWN
+   CAMERA PAGE 
 ========================= */
 
-#countdown {
-  position: fixed;
+.camera-page {
+  margin: 0;
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Fredoka", sans-serif;
+}
+
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Video */
+.camera-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Filter fills entire frame */
+.camera-filter {
+  position: absolute;
   inset: 0;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* COUNTDOWN */
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: none;
   align-items: center;
-  font-size: 120px;
-  font-weight: bold;
+  justify-content: center;
+  font-size: 180px;
+  font-weight: 600;
   color: white;
+  text-shadow: 0 0 40px rgba(0,0,0,0.8);
   z-index: 5;
   pointer-events: none;
 }

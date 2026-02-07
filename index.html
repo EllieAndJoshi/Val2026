@@ -2,60 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Secret Access 💌</title>
+  <title>Will you be my Valentine?</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- =========================
-       LOGIN SCREEN
-  ========================== -->
-  <div id="login-screen" class="main-box">
-    <h1>Who are you? 💭</h1>
-    
-    <input type="text" id="nameInput" placeholder="Enter your name..." />
-    
-    <button id="loginBtn" class="pill-btn yes-btn">
-      Enter
-    </button>
+  <!-- Picture wall background -->
+  <div id="picture-wall"></div>
 
-    <p id="loginMessage"></p>
+  <div id="top-message"></div>
+
+  <div class="card">
+    <img src="assets/cute.gif" class="icon" alt="cute icon">
+    <h1>Elena will you be my valentine??</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
   </div>
 
-  <!-- =========================
-       MAIN CONTENT (HIDDEN FIRST)
-  ========================== -->
-  <div id="main-content" style="display: none;">
-
-    <!-- Background picture wall -->
-    <div id="picture-wall"></div>
-
-    <!-- Top message -->
-    <div id="top-message"></div>
-
-    <!-- Main Valentine Card -->
-    <div class="main-box">
-      <img src="assets/cute.gif" class="icon" alt="cute icon">
-
-      <h1>Elena will you be my valentine?</h1>
-
-      <div>
-        <button id="yesBtn" class="pill-btn yes-btn">Yes</button>
-        <button id="noBtn" class="pill-btn no-btn">No</button>
-      </div>
-    </div>
-
-    <!-- Sad bubble -->
-    <div id="sad-bubble">
-      <p id="bubble-text"></p>
-    </div>
-
+  <!-- Sad bubble -->
+  <div id="sad-bubble">
+    <p id="bubble-text"></p>
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
