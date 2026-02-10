@@ -1,55 +1,38 @@
-/* =================================================
-   MAIN PAGE LOGIC
-================================================= */
-
+const card = document.querySelector(".card");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const sadBubble = document.getElementById("sad-bubble");
-const bubbleText = document.getElementById("bubble-text");
+const topMessage = document.getElementById("top-message");
 
-if (yesBtn && noBtn) {
+/* YES */
+yesBtn.addEventListener("click", () => {
+  window.location.href = "celebration.html";
+});
 
-  /* Apply correct button styles */
-  yesBtn.classList.add("pill-btn", "yes-style");
-  noBtn.classList.add("pill-btn", "no-style");
+/* Glow on hover */
+yesBtn.addEventListener("mouseenter", () => {
+  card.style.boxShadow = "0 0 40px rgba(255,90,138,0.6)";
+});
 
-  /* =========================
-     YES BUTTON
-  ========================= */
+yesBtn.addEventListener("mouseleave", () => {
+  card.style.boxShadow = "0 20px 40px rgba(0,0,0,0.15)";
+});
 
-  yesBtn.addEventListener("click", () => {
-    window.location.href = "celebration.html";
-  });
+/* NO hover sad theme */
+noBtn.addEventListener("mouseenter", () => {
+  card.style.background = "#e0e0e0";
+  sadBubble.style.display = "block";
+});
 
-  /* =========================
-     NO BUTTON HOVER (TEMP SAD MODE)
-  ========================= */
+noBtn.addEventListener("mouseleave", () => {
+  card.style.background = "#f2f2f2";
+  sadBubble.style.display = "none";
+});
 
-  noBtn.addEventListener("mouseenter", () => {
-    document.body.classList.add("sad");
-    bubbleText.textContent = "That makes me sad 😢";
-    sadBubble.style.display = "block";
-  });
-
-  noBtn.addEventListener("mouseleave", () => {
-    document.body.classList.remove("sad");
-    sadBubble.style.display = "none";
-  });
-
-  /* =========================
-     NO BUTTON CLICK (ERROR MESSAGE ONLY)
-  ========================= */
-
-  noBtn.addEventListener("click", () => {
-    bubbleText.textContent = "It must be an error... restart the page 😌";
-    sadBubble.style.display = "block";
-
-    setTimeout(() => {
-      sadBubble.style.display = "none";
-    }, 3000);
-  });
-
-}
+/* NO click top message */
+noBtn.addEventListener("click", () => {
+  topMessage.textContent = "It must be an error... please try again 💔";
+});
 
 
 /* =================================================

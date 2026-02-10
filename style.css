@@ -1,188 +1,272 @@
-/* =========================
+/* =================================================
    GLOBAL
-========================= */
+================================================= */
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: 'Fredoka', sans-serif;
-  background-color: #d7a6b1;
-  overflow-x: hidden;
-}
-
-/* Perfect center for all main pages */
-.page-center,
-body.celebrate,
-body.ily-page {
-  min-height: 100vh;
+  background: #e6b8c2;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-/* =========================
-   CARD BASE (INDEX + CELEBRATION)
-========================= */
+/* =================================================
+   SHARED CARD STYLE
+================================================= */
 
 .card {
-  position: relative;
+  width: 520px;
+  min-height: 420px;
   background: #f2f2f2;
-  width: 600px;
-  max-width: 90%;
-  padding: 50px 40px 90px 40px;
   border-radius: 30px;
+  padding: 40px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  transition: 0.3s ease;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-/* =========================
-   GLOW EFFECT (YES BUTTON EVENT)
-========================= */
-
-.card.glow {
-  box-shadow: 0 0 40px rgba(255, 80, 120, 0.8);
-  transform: scale(1.02);
+.icon {
+  width: 180px;
+  margin-bottom: 20px;
 }
 
-/* =========================
-   SAD SHAKE (NO BUTTON EVENT)
-========================= */
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-10px); }
-  40% { transform: translateX(10px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
-  100% { transform: translateX(0); }
+h1 {
+  margin-bottom: 30px;
 }
 
-.card.sad {
-  animation: shake 0.4s ease;
-}
-
-/* =========================
-   BUTTONS (PILL STYLE)
-========================= */
+/* =================================================
+   BUTTONS
+================================================= */
 
 .pill-btn {
+  padding: 14px 40px;
+  border-radius: 999px;
   border: none;
-  padding: 12px 35px;
-  border-radius: 50px;
   font-size: 16px;
-  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 /* YES BUTTON */
-.pill-btn.yes {
-  background: #ff5c8a;
+.yes-style {
+  background: #ff5a8a;
   color: white;
 }
 
-.pill-btn.yes:hover {
-  background: #ff3e74;
+.yes-style:hover {
+  box-shadow: 0 0 20px rgba(255,90,138,0.7);
   transform: scale(1.05);
 }
 
 /* NO BUTTON */
-.pill-btn.no {
+.no-style {
   background: #d9d9d9;
+  color: #333;
 }
 
-.pill-btn.no:hover {
-  background: #c4c4c4;
+/* Buttons container (index page only) */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 }
 
-/* Celebration buttons positioning */
-.bottom-left {
+/* =================================================
+   SAD BUBBLE (INDEX)
+================================================= */
+
+#sad-bubble {
+  display: none;
   position: absolute;
-  bottom: 25px;
-  left: 30px;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  font-size: 14px;
 }
 
-.bottom-right {
+#top-message {
   position: absolute;
-  bottom: 25px;
-  right: 30px;
+  top: 30px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-/* =========================
-   CONFETTI CANVAS
-========================= */
+/* =================================================
+   CELEBRATION PAGE
+================================================= */
 
-canvas#confetti {
+body.celebrate {
+  overflow: hidden;
+}
+
+.celebration-card {
+  position: relative;
+  width: 520px;
+  min-height: 420px;
+  padding: 40px 30px 100px 30px;
+  text-align: center;
+}
+
+/* Confetti background canvas */
+#confetti {
   position: fixed;
   top: 0;
   left: 0;
-  pointer-events: none;
   z-index: 0;
 }
 
-/* =========================
-   ILY PAGE (LARGE SCROLLABLE CARD)
-========================= */
-
-.ily-card {
-  background: #f2f2f2;
-  width: 850px;
-  max-width: 95%;
-  height: 75vh;
-  padding: 50px;
-  border-radius: 30px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  overflow-y: auto;
+.celebration-card {
+  z-index: 1;
 }
 
-/* Scrollbar styling */
+/* Independent corner buttons */
+.celebration-btn {
+  position: absolute;
+  bottom: 25px;
+  background: #ff5a8a;
+  color: white;
+}
+
+.celebration-btn:hover {
+  box-shadow: 0 0 20px rgba(255,90,138,0.7);
+  transform: scale(1.05);
+}
+
+.left-btn {
+  left: 30px;
+}
+
+.right-btn {
+  right: 30px;
+}
+
+/* =================================================
+   ILY PAGE (Scrollable Love Letter)
+================================================= */
+
+body.ily-page {
+  overflow: auto;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.ily-card {
+  width: 700px;
+  max-height: 75vh;
+  overflow-y: auto;
+  padding: 50px;
+}
+
+/* Custom scrollbar */
 .ily-card::-webkit-scrollbar {
   width: 8px;
 }
 
 .ily-card::-webkit-scrollbar-thumb {
-  background: #ff5c8a;
+  background: #ff5a8a;
   border-radius: 10px;
 }
 
-/* =========================
-   SIDEBAR (CAMERA PAGE)
-========================= */
+/* =================================================
+   CAMERA PAGE
+================================================= */
 
-.sidebar {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 250px;
+body.camera-page {
+  background: black;
+  overflow: hidden;
+}
+
+/* Camera container */
+.camera-container {
+  position: relative;
+  width: 100vw;
   height: 100vh;
-  background: #f2f2f2;
-  padding: 20px;
-  box-shadow: -10px 0 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-  transform: translateX(0);
 }
 
-.sidebar.closed {
-  transform: translateX(100%);
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Pink round toggle arrow */
-.sidebar-toggle {
+.camera-filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* =================================================
+   SIDEBAR
+================================================= */
+
+#sidebar {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: none;
-  background: #ff5c8a;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 999;
-  transition: 0.2s ease;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background: #f2f2f2;
+  padding: 80px 20px 20px 20px;
+  transition: right 0.3s ease;
+  z-index: 5;
 }
 
-.sidebar-toggle:hover {
+#sidebar.open {
+  right: 0;
+}
+
+/* Pink round arrow toggle */
+#sidebar-toggle {
+  position: absolute;
+  left: -25px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  background: #ff5a8a;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+#sidebar-toggle:hover {
   transform: scale(1.1);
+}
+
+.sidebar-btn {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Countdown */
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: white;
+  display: none;
+  z-index: 10;
 }
