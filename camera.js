@@ -1,7 +1,3 @@
-/* =================================================
-   CAMERA PAGE LOGIC
-================================================= */
-
 const video = document.getElementById("video");
 const filter = document.getElementById("cameraFilter");
 
@@ -18,106 +14,71 @@ const countdownEl = document.getElementById("countdown");
 let filterVisible = true;
 let flipped = false;
 let readyActive = false;
+let currentFilter = "filter1.png";
 
-/* =================================================
-   START CAMERA
-================================================= */
+/* CAMERA INIT */
 
 navigator.mediaDevices.getUserMedia({
   video: { facingMode: "user" },
   audio: false
-})
-.then(stream => {
+}).then(stream => {
   video.srcObject = stream;
-})
-.catch(() => {
+}).catch(() => {
   alert("Camera access denied 😢");
 });
 
-/* =================================================
-   LOAD FILTER
-================================================= */
+/* LOAD FILTER */
 
 function loadFilter(filename) {
+  currentFilter = filename;
   filter.src = `assets/filters/${filename}?v=${Date.now()}`;
 }
 
-loadFilter("filter1.png"); // default = landscape
+loadFilter("filter1.png");
 
-
-/* =================================================
-   SIDEBAR DEFAULT OPEN
-================================================= */
+/* SIDEBAR START OPEN */
 
 sidebar.classList.add("open");
 
-
-/* =================================================
-   SIDEBAR TOGGLE
-================================================= */
+/* SIDEBAR TOGGLE */
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
 });
 
-
-/* =================================================
-   TOGGLE FILTER VISIBILITY
-================================================= */
+/* TOGGLE FILTER */
 
 toggleFilterBtn.addEventListener("click", () => {
   filterVisible = !filterVisible;
-
   filter.style.display = filterVisible ? "block" : "none";
   toggleFilterBtn.classList.toggle("active", filterVisible);
 });
 
-
-/* =================================================
-   SWITCH FILTER (LANDSCAPE / PORTRAIT)
-================================================= */
+/* SWITCH FILTER — NOW ALWAYS FITS WINDOW */
 
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
 
-    // Update active state
     filterButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    // Load filter
     loadFilter(btn.dataset.filter);
 
-    /* Adapt video + filter fitting */
-
-    if (btn.dataset.filter === "filter1.png") {
-      // LANDSCAPE → fill entire window
-      video.style.objectFit = "cover";
-      filter.style.objectFit = "cover";
-    } else {
-      // PORTRAIT → ensure filter fully visible
-      video.style.objectFit = "contain";
-      filter.style.objectFit = "contain";
-    }
-
+    /* Force both video & filter to cover window */
+    video.style.objectFit = "cover";
+    filter.style.objectFit = "cover";
   });
 });
 
-
-/* =================================================
-   FLIP CAMERA
-================================================= */
+/* FLIP CAMERA (FILTER LOCKED) */
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
-
   video.style.transform = flipped ? "scaleX(-1)" : "scaleX(1)";
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
-
-/* =================================================
-   READY FOR PIC
-================================================= */
+/* READY FOR PIC */
 
 readyPicBtn.addEventListener("click", () => {
   if (readyActive) return;
@@ -130,20 +91,15 @@ readyPicBtn.addEventListener("click", () => {
   startCountdown(5);
 });
 
-
-/* =================================================
-   COUNTDOWN
-================================================= */
+/* COUNTDOWN */
 
 function startCountdown(seconds) {
-
   let current = seconds;
 
   countdownEl.style.display = "flex";
   countdownEl.textContent = current;
 
   const interval = setInterval(() => {
-
     current--;
 
     if (current > 0) {
@@ -154,19 +110,14 @@ function startCountdown(seconds) {
       takePhoto();
       restoreSidebar();
     }
-
   }, 1000);
 }
 
-
-/* =================================================
-   TAKE PHOTO
-================================================= */
+/* TAKE PHOTO */
 
 function takePhoto() {
 
   const canvas = document.createElement("canvas");
-
   const w = video.videoWidth;
   const h = video.videoHeight;
 
@@ -175,18 +126,14 @@ function takePhoto() {
 
   const ctx = canvas.getContext("2d");
 
-  // Flip if needed
   if (flipped) {
     ctx.translate(w, 0);
     ctx.scale(-1, 1);
   }
 
   ctx.drawImage(video, 0, 0, w, h);
-
-  // Reset transform
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  // Draw filter if visible
   if (filterVisible) {
     ctx.drawImage(filter, 0, 0, w, h);
   }
@@ -197,10 +144,7 @@ function takePhoto() {
   link.click();
 }
 
-
-/* =================================================
-   RESTORE SIDEBAR AFTER PHOTO
-================================================= */
+/* RESTORE SIDEBAR */
 
 function restoreSidebar() {
   setTimeout(() => {
