@@ -16,7 +16,9 @@ let flipped = false;
 let readyActive = false;
 let currentFilter = "filter1.png";
 
-/* CAMERA INIT */
+/* =========================
+   CAMERA INIT
+========================= */
 
 navigator.mediaDevices.getUserMedia({
   video: { facingMode: "user" },
@@ -27,32 +29,51 @@ navigator.mediaDevices.getUserMedia({
   alert("Camera access denied 😢");
 });
 
-/* LOAD FILTER */
+/* =========================
+   LOAD FILTER (FIXED)
+========================= */
 
 function loadFilter(filename) {
   currentFilter = filename;
+
+  // Force reload + ensure visibility
   filter.src = `assets/filters/${filename}?v=${Date.now()}`;
+  filter.style.display = "block";
+  filter.style.position = "absolute";
+  filter.style.top = "0";
+  filter.style.left = "0";
+  filter.style.width = "100%";
+  filter.style.height = "100%";
+  filter.style.objectFit = "cover";
+  filter.style.pointerEvents = "none";
 }
 
 loadFilter("filter1.png");
 
-/* SIDEBAR START OPEN */
+/* =========================
+   SIDEBAR START OPEN
+========================= */
 
 sidebar.classList.add("open");
+toggleArrow.textContent = "❮";
 
-/* SIDEBAR TOGGLE */
+/* =========================
+   SIDEBAR TOGGLE
+========================= */
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
 
   if (sidebar.classList.contains("open")) {
-    toggleArrow.textContent = "❮";  // arrow pointing left
+    toggleArrow.textContent = "❮";
   } else {
-    toggleArrow.textContent = "❯";  // arrow pointing right
+    toggleArrow.textContent = "❯";
   }
 });
 
-/* TOGGLE FILTER */
+/* =========================
+   TOGGLE FILTER VISIBILITY
+========================= */
 
 toggleFilterBtn.addEventListener("click", () => {
   filterVisible = !filterVisible;
@@ -60,7 +81,9 @@ toggleFilterBtn.addEventListener("click", () => {
   toggleFilterBtn.classList.toggle("active", filterVisible);
 });
 
-/* SWITCH FILTER — NOW ALWAYS FITS WINDOW */
+/* =========================
+   SWITCH FILTER
+========================= */
 
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -70,13 +93,14 @@ filterButtons.forEach(btn => {
 
     loadFilter(btn.dataset.filter);
 
-    /* Force both video & filter to cover window */
+    // Always cover full window
     video.style.objectFit = "cover";
-    filter.style.objectFit = "cover";
   });
 });
 
-/* FLIP CAMERA (FILTER LOCKED) */
+/* =========================
+   FLIP CAMERA
+========================= */
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
@@ -84,20 +108,23 @@ flipCameraBtn.addEventListener("click", () => {
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
-/* READY FOR PIC */
+/* =========================
+   READY FOR PIC
+========================= */
 
 readyPicBtn.addEventListener("click", () => {
   if (readyActive) return;
 
   readyActive = true;
   readyPicBtn.classList.add("active");
-
   sidebar.classList.remove("open");
 
   startCountdown(5);
 });
 
-/* COUNTDOWN */
+/* =========================
+   COUNTDOWN
+========================= */
 
 function startCountdown(seconds) {
   let current = seconds;
@@ -119,7 +146,9 @@ function startCountdown(seconds) {
   }, 1000);
 }
 
-/* TAKE PHOTO */
+/* =========================
+   TAKE PHOTO
+========================= */
 
 function takePhoto() {
 
@@ -150,7 +179,9 @@ function takePhoto() {
   link.click();
 }
 
-/* RESTORE SIDEBAR */
+/* =========================
+   RESTORE SIDEBAR
+========================= */
 
 function restoreSidebar() {
   setTimeout(() => {
