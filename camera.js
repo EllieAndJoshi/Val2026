@@ -7,15 +7,17 @@ const toggleArrow = document.getElementById("sidebar-toggle");
 const toggleFilterBtn = document.getElementById("toggleFilter");
 const flipCameraBtn = document.getElementById("flipCamera");
 const readyPicBtn = document.getElementById("readyPic");
+
 const filterButtons = document.querySelectorAll(".filter-btn");
 const countdownEl = document.getElementById("countdown");
 
 let filterVisible = true;
 let flipped = false;
 let readyActive = false;
-let readyTimeout = null;
 
-/* CAMERA INIT */
+/* =========================
+   CAMERA INIT
+========================= */
 
 navigator.mediaDevices.getUserMedia({
   video: { facingMode: "user" },
@@ -26,7 +28,9 @@ navigator.mediaDevices.getUserMedia({
   alert("Camera access denied 😢");
 });
 
-/* LOAD FILTER */
+/* =========================
+   LOAD FILTER
+========================= */
 
 function loadFilter(filename) {
   filter.src = `assets/filters/${filename}?v=${Date.now()}`;
@@ -34,19 +38,23 @@ function loadFilter(filename) {
 
 loadFilter("filter1.png");
 
-/* SIDEBAR TOGGLE */
+/* =========================
+   SIDEBAR START OPEN
+========================= */
+
+sidebar.classList.add("open");
+
+/* =========================
+   SIDEBAR TOGGLE
+========================= */
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-
-  if (sidebar.classList.contains("open")) {
-    toggleArrow.textContent = "❯";
-  } else {
-    toggleArrow.textContent = "❮";
-  }
 });
 
-/* TOGGLE FILTER */
+/* =========================
+   TOGGLE FILTER VISIBILITY
+========================= */
 
 toggleFilterBtn.addEventListener("click", () => {
   filterVisible = !filterVisible;
@@ -54,17 +62,35 @@ toggleFilterBtn.addEventListener("click", () => {
   toggleFilterBtn.classList.toggle("active", filterVisible);
 });
 
-/* SWITCH FILTER */
+/* =========================
+   SWITCH FILTER (2 ONLY)
+========================= */
 
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
+
     filterButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
+
     loadFilter(btn.dataset.filter);
+
+    /* ADAPT OBJECT FIT BASED ON ORIENTATION */
+    if (btn.dataset.filter === "filter1.png") {
+      // landscape
+      video.style.objectFit = "cover";
+      filter.style.objectFit = "cover";
+    } else {
+      // portrait
+      video.style.objectFit = "contain";
+      filter.style.objectFit = "contain";
+    }
+
   });
 });
 
-/* FLIP CAMERA (FILTER LOCKED) */
+/* =========================
+   FLIP CAMERA (FILTER LOCKED)
+========================= */
 
 flipCameraBtn.addEventListener("click", () => {
   flipped = !flipped;
@@ -72,7 +98,9 @@ flipCameraBtn.addEventListener("click", () => {
   flipCameraBtn.classList.toggle("active", flipped);
 });
 
-/* READY FOR PIC */
+/* =========================
+   READY FOR PIC
+========================= */
 
 readyPicBtn.addEventListener("click", () => {
   if (readyActive) return;
@@ -81,12 +109,13 @@ readyPicBtn.addEventListener("click", () => {
   readyPicBtn.classList.add("active");
 
   sidebar.classList.remove("open");
-  toggleArrow.textContent = "❮";
 
   startCountdown(5);
 });
 
-/* COUNTDOWN FUNCTION */
+/* =========================
+   COUNTDOWN
+========================= */
 
 function startCountdown(seconds) {
   let current = seconds;
@@ -108,9 +137,12 @@ function startCountdown(seconds) {
   }, 1000);
 }
 
-/* TAKE PHOTO */
+/* =========================
+   TAKE PHOTO
+========================= */
 
 function takePhoto() {
+
   const canvas = document.createElement("canvas");
   const w = video.videoWidth;
   const h = video.videoHeight;
@@ -138,12 +170,13 @@ function takePhoto() {
   link.click();
 }
 
-/* RESTORE SIDEBAR */
+/* =========================
+   RESTORE SIDEBAR
+========================= */
 
 function restoreSidebar() {
   setTimeout(() => {
     sidebar.classList.add("open");
-    toggleArrow.textContent = "❯";
     readyPicBtn.classList.remove("active");
     readyActive = false;
   }, 1000);
