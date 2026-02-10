@@ -11,7 +11,7 @@ yesBtn.addEventListener("click", () => {
 
 /* Glow on hover */
 yesBtn.addEventListener("mouseenter", () => {
-  card.style.boxShadow = "0 0 40px rgba(255,90,138,0.6)";
+  card.style.boxShadow = "0 0 40px rgba(236, 187, 80, 0.6)";
 });
 
 yesBtn.addEventListener("mouseleave", () => {
@@ -20,13 +20,11 @@ yesBtn.addEventListener("mouseleave", () => {
 
 /* NO hover sad theme */
 noBtn.addEventListener("mouseenter", () => {
-  card.style.background = "#e0e0e0";
-  sadBubble.style.display = "block";
+  document.body.classList.add("sad-mode");
 });
 
 noBtn.addEventListener("mouseleave", () => {
-  card.style.background = "#f2f2f2";
-  sadBubble.style.display = "none";
+  document.body.classList.remove("sad-mode");
 });
 
 /* NO click top message */

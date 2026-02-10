@@ -105,6 +105,20 @@ h1 {
   font-size: 18px;
 }
 
+/* SAD FULL PAGE THEME */
+body.sad-mode {
+  background: #cfcfcf !important;
+}
+
+body.sad-mode .card {
+  background: #e0e0e0;
+}
+
+body.sad-mode h1,
+body.sad-mode #top-message {
+  color: #444;
+}
+
 /* =================================================
    CELEBRATION PAGE
 ================================================= */
@@ -231,13 +245,13 @@ video {
   right: 0;
 }
 
-/* Pink round arrow toggle */
+/* PINK ROUND TOGGLE ALWAYS VISIBLE */
 #sidebar-toggle {
-  position: absolute;
-  left: -25px;
+  position: fixed;   /* important change */
+  right: 20px;
   top: 20px;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   background: #ff5a8a;
   color: white;
   border-radius: 50%;
@@ -245,8 +259,9 @@ video {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  font-size: 22px;
+  z-index: 20;      /* above everything */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
   transition: transform 0.3s ease;
 }
 
@@ -257,6 +272,12 @@ video {
 .sidebar-btn {
   width: 100%;
   margin-bottom: 15px;
+}
+/* SIDEBAR ACTIVE BUTTON */
+.sidebar-btn.active {
+  background: #ff5a8a;
+  color: white;
+  box-shadow: 0 0 15px rgba(255,90,138,0.6);
 }
 
 /* Countdown */
