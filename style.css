@@ -9,7 +9,7 @@ html, body {
 }
 
 /* =========================
-   MAIN PAGE
+   GENERAL BODY
 ========================= */
 
 body {
@@ -21,13 +21,8 @@ body {
   transition: 0.4s ease;
 }
 
-body.sad {
-  background: #6b6b6b;
-  filter: grayscale(40%) brightness(0.85);
-}
-
 /* =========================
-   MAIN CARD
+   CARD BASE
 ========================= */
 
 .card {
@@ -41,19 +36,8 @@ body.sad {
   position: relative;
 }
 
-h1 {
-  font-size: 42px;
-  margin-bottom: 60px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-}
-
 /* =========================
-   PILL BUTTON (CORRECT SHAPE)
+   PILL BUTTON
 ========================= */
 
 .pill-btn {
@@ -75,7 +59,6 @@ h1 {
 ========================= */
 
 .celebrate {
-  margin: 0;
   background: #f6cbd6;
   display: flex;
   justify-content: center;
@@ -95,36 +78,52 @@ h1 {
 }
 
 .celebration-card {
-  position: relative;
   z-index: 1;
-  background: white;
-  padding: 100px;
-  border-radius: 42px;
-  width: 820px;
-  max-width: 94vw;
-  text-align: center;
-  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
+  position: relative;
 }
 
-/* Bottom-left button container */
-.celebration-buttons {
+/* Button positions */
+.left-btn {
   position: absolute;
   bottom: 30px;
   left: 30px;
-  display: flex;
-  gap: 20px;
+  background: #e0e0e0;
 }
 
-/* Default grey style */
-.celebration-btn {
+.right-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
   background: #e0e0e0;
-  color: #111;
 }
 
 .celebration-btn:hover {
   background: #ff5a8a;
   color: white;
   transform: scale(1.08);
+}
+
+/* =========================
+   ILY PAGE
+========================= */
+
+.ily-page {
+  background: #f6cbd6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.large-card {
+  width: 1000px;
+  max-width: 95vw;
+  height: 80vh;
+  overflow-y: auto;
+  padding: 80px;
+  border-radius: 42px;
+  background: white;
+  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
 }
 
 /* =========================
@@ -148,23 +147,17 @@ h1 {
 .camera-container video,
 .camera-filter {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-}
-
-/* IMPORTANT FIX — FILTER ALWAYS FILLS WINDOW */
-.camera-container video {
   object-fit: cover;
 }
 
 .camera-filter {
-  object-fit: cover;
   pointer-events: none;
 }
 
 /* Sidebar */
+
 #sidebar {
   position: fixed;
   top: 0;
@@ -185,6 +178,31 @@ h1 {
   right: 0;
 }
 
+/* ROUND PINK ARROW BUTTON */
+
+#sidebar-toggle {
+  position: fixed;
+  top: 25px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  background: #ff5a8a;
+  color: white;
+  font-size: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+#sidebar-toggle:hover {
+  transform: scale(1.1);
+}
+
 .sidebar-btn {
   height: 48px;
   border-radius: 36px;
@@ -199,10 +217,6 @@ h1 {
   color: white;
 }
 
-.sidebar-btn:hover {
-  transform: scale(1.05);
-}
-
 .countdown {
   position: absolute;
   inset: 0;
@@ -211,5 +225,4 @@ h1 {
   justify-content: center;
   font-size: 180px;
   color: white;
-  text-shadow: 0 0 40px rgba(0,0,0,0.8);
 }

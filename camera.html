@@ -10,19 +10,18 @@
 
 <body class="camera-page">
 
-  <!-- =========================
-       SIDEBAR (RIGHT SIDE)
-  ========================== -->
+  <!-- ROUND PINK ARROW BUTTON -->
+  <div id="sidebar-toggle">❮</div>
+
+  <!-- Sidebar -->
   <div id="sidebar" class="open">
 
-    <div id="sidebar-toggle">❯</div>
-
     <button id="toggleFilter" class="pill-btn sidebar-btn active">
-      Toggle Filter
+      Toggle filter
     </button>
 
     <button id="flipCamera" class="pill-btn sidebar-btn">
-      Flip Camera
+      Flip camera
     </button>
 
     <button id="readyPic" class="pill-btn sidebar-btn">
@@ -43,24 +42,13 @@
 
   </div>
 
-
-  <!-- =========================
-       CAMERA CONTAINER
-  ========================== -->
+  <!-- Camera -->
   <div class="camera-container">
-
-    <!-- Live camera -->
     <video id="video" autoplay playsinline></video>
-
-    <!-- Filter overlay -->
-    <img id="cameraFilter" class="camera-filter" alt="Filter">
-
-    <!-- Countdown overlay -->
+    <img id="cameraFilter" class="camera-filter" alt="filter">
     <div id="countdown" class="countdown"></div>
-
   </div>
 
   <script src="camera.js"></script>
-
 </body>
 </html>

@@ -44,6 +44,12 @@ sidebar.classList.add("open");
 
 toggleArrow.addEventListener("click", () => {
   sidebar.classList.toggle("open");
+
+  if (sidebar.classList.contains("open")) {
+    toggleArrow.textContent = "❮";  // arrow pointing left
+  } else {
+    toggleArrow.textContent = "❯";  // arrow pointing right
+  }
 });
 
 /* TOGGLE FILTER */

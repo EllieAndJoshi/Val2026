@@ -16,14 +16,25 @@
     <h1>Yayyyy, Love you!❤️</h1>
     <img src="assets/crystal-amaru.gif" width="250">
 
-    <!-- Bottom left buttons -->
-    <div class="celebration-buttons">
-      <button id="cameraBtn" class="pill-btn celebration-btn">click here</button>
-      <button id="finallyBtn" class="pill-btn celebration-btn">finally</button>
-    </div>
+    <!-- Bottom Left Button -->
+    <button id="cameraBtn" class="pill-btn celebration-btn left-btn">
+      click here
+    </button>
+
+    <!-- Bottom Right Button -->
+    <button id="finallyBtn" class="pill-btn celebration-btn right-btn">
+      finally
+    </button>
   </div>
 
   <script src="confetti.js"></script>
   <script src="camera-launcher.js"></script>
+
+  <script>
+    document.getElementById("finallyBtn").addEventListener("click", () => {
+      window.location.href = "ily.html";
+    });
+  </script>
+
 </body>
 </html>
