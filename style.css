@@ -1,228 +1,188 @@
-* {
-  box-sizing: border-box;
-  font-family: "Fredoka", sans-serif;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
 /* =========================
-   GENERAL BODY
+   GLOBAL
 ========================= */
 
 body {
-  background: #f6cbd6;
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  background-color: #d7a6b1;
+  overflow-x: hidden;
+}
+
+/* Perfect center for all main pages */
+.page-center,
+body.celebrate,
+body.ily-page {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  transition: 0.4s ease;
 }
 
 /* =========================
-   CARD BASE
+   CARD BASE (INDEX + CELEBRATION)
 ========================= */
 
 .card {
-  background: white;
-  padding: 100px;
-  border-radius: 42px;
-  width: 820px;
-  max-width: 94vw;
-  text-align: center;
-  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
   position: relative;
+  background: #f2f2f2;
+  width: 600px;
+  max-width: 90%;
+  padding: 50px 40px 90px 40px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
 }
 
 /* =========================
-   PILL BUTTON
+   GLOW EFFECT (YES BUTTON EVENT)
+========================= */
+
+.card.glow {
+  box-shadow: 0 0 40px rgba(255, 80, 120, 0.8);
+  transform: scale(1.02);
+}
+
+/* =========================
+   SAD SHAKE (NO BUTTON EVENT)
+========================= */
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
+.card.sad {
+  animation: shake 0.4s ease;
+}
+
+/* =========================
+   BUTTONS (PILL STYLE)
 ========================= */
 
 .pill-btn {
-  height: 64px;
-  min-width: 170px;
-  padding: 0 48px;
-  border-radius: 999px;
   border: none;
-  font-size: 22px;
+  padding: 12px 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Fredoka', sans-serif;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  transition: 0.2s ease;
+}
+
+/* YES BUTTON */
+.pill-btn.yes {
+  background: #ff5c8a;
+  color: white;
+}
+
+.pill-btn.yes:hover {
+  background: #ff3e74;
+  transform: scale(1.05);
+}
+
+/* NO BUTTON */
+.pill-btn.no {
+  background: #d9d9d9;
+}
+
+.pill-btn.no:hover {
+  background: #c4c4c4;
+}
+
+/* Celebration buttons positioning */
+.bottom-left {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
 }
 
 /* =========================
-   CELEBRATION PAGE
+   CONFETTI CANVAS
 ========================= */
 
-.celebrate {
-  background: #f6cbd6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-#confetti {
+canvas#confetti {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  pointer-events: none;
   z-index: 0;
 }
 
-.celebration-card {
-  z-index: 1;
-  position: relative;
-}
-
-/* Button positions */
-.left-btn {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  background: #e0e0e0;
-}
-
-.right-btn {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  background: #e0e0e0;
-}
-
-.celebration-btn:hover {
-  background: #ff5a8a;
-  color: white;
-  transform: scale(1.08);
-}
-
 /* =========================
-   ILY PAGE
+   ILY PAGE (LARGE SCROLLABLE CARD)
 ========================= */
 
-.ily-page {
-  background: #f6cbd6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.large-card {
-  width: 1000px;
-  max-width: 95vw;
-  height: 80vh;
+.ily-card {
+  background: #f2f2f2;
+  width: 850px;
+  max-width: 95%;
+  height: 75vh;
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   overflow-y: auto;
-  padding: 80px;
-  border-radius: 42px;
-  background: white;
-  box-shadow: 0 30px 65px rgba(0,0,0,0.2);
+}
+
+/* Scrollbar styling */
+.ily-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ily-card::-webkit-scrollbar-thumb {
+  background: #ff5c8a;
+  border-radius: 10px;
 }
 
 /* =========================
-   CAMERA PAGE
+   SIDEBAR (CAMERA PAGE)
 ========================= */
 
-.camera-page {
-  margin: 0;
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.camera-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.camera-container video,
-.camera-filter {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.camera-filter {
-  pointer-events: none;
-}
-
-/* Sidebar */
-
-#sidebar {
+.sidebar {
   position: fixed;
-  top: 0;
-  right: -260px;
-  width: 260px;
-  height: 100%;
-  background: rgba(255,255,255,0.95);
-  padding: 20px;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-  transition: right 0.4s ease;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-#sidebar.open {
   right: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background: #f2f2f2;
+  padding: 20px;
+  box-shadow: -10px 0 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  transform: translateX(0);
 }
 
-/* ROUND PINK ARROW BUTTON */
+.sidebar.closed {
+  transform: translateX(100%);
+}
 
-#sidebar-toggle {
+/* Pink round toggle arrow */
+.sidebar-toggle {
   position: fixed;
-  top: 25px;
+  top: 20px;
   right: 20px;
-  width: 55px;
-  height: 55px;
-  background: #ff5a8a;
-  color: white;
-  font-size: 26px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 20;
-  transition: 0.3s ease;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-}
-
-#sidebar-toggle:hover {
-  transform: scale(1.1);
-}
-
-.sidebar-btn {
-  height: 48px;
-  border-radius: 36px;
   border: none;
-  background: #e0e0e0;
+  background: #ff5c8a;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  z-index: 999;
+  transition: 0.2s ease;
 }
 
-.sidebar-btn.active {
-  background: #ff5a8a;
-  color: white;
-}
-
-.countdown {
-  position: absolute;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 180px;
-  color: white;
+.sidebar-toggle:hover {
+  transform: scale(1.1);
 }
