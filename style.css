@@ -8,9 +8,9 @@ html, body {
   padding: 0;
 }
 
-/* =================================================
-   BASE BODY
-================================================= */
+/* =========================
+   MAIN PAGE
+========================= */
 
 body {
   background: #f6cbd6;
@@ -21,16 +21,14 @@ body {
   transition: 0.4s ease;
 }
 
-/* SAD MODE (ONLY VISUAL STATE) */
-
 body.sad {
   background: #6b6b6b;
   filter: grayscale(40%) brightness(0.85);
 }
 
-/* =================================================
-   CARD (MAIN + CELEBRATION)
-================================================= */
+/* =========================
+   CARD (USED EVERYWHERE)
+========================= */
 
 .card {
   background: white;
@@ -43,7 +41,7 @@ body.sad {
   position: relative;
 }
 
-/* Ensure celebration card stays centered */
+/* Center celebration page properly */
 .celebrate {
   background: #f6cbd6;
   width: 100vw;
@@ -51,35 +49,31 @@ body.sad {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
+/* Celebration card inherits .card */
 .celebration-card {
-  padding: 90px;
+  position: relative;
 }
 
 .celebration-card img {
-  width: 200px;
+  width: 220px;
   margin-bottom: 30px;
 }
 
-/* =================================================
-   ICON
-================================================= */
-
-.icon {
-  width: 140px; /* slightly smaller gif */
-  margin-bottom: 30px;
-}
+/* =========================
+   TEXT
+========================= */
 
 h1 {
   font-size: 42px;
   margin-bottom: 60px;
 }
 
-/* =================================================
-   BUTTON CONTAINER
-================================================= */
+.icon {
+  width: 150px;
+  margin-bottom: 30px;
+}
 
 .buttons {
   display: flex;
@@ -87,70 +81,96 @@ h1 {
   gap: 60px;
 }
 
-/* =================================================
-   PILL BUTTON BASE
-================================================= */
+/* =========================
+   PERFECT PILL BUTTON STYLE
+========================= */
 
+button,
 .pill-btn {
   height: 64px;
-  min-width: 170px;
-  padding: 0 48px;
+  min-width: 180px;
+  padding: 0 50px;
+
   border-radius: 999px;
   border: none;
-  font-size: 26px;
+
+  font-size: 24px;
+  font-weight: 600;
+
   cursor: pointer;
-  display: flex;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+
   transition: all 0.3s ease;
 }
 
-/* =================================================
+/* =========================
    YES BUTTON
-================================================= */
+========================= */
 
-.yes-style {
+#yesBtn {
   background: #ff5a8a;
   color: white;
   position: relative;
 }
 
-.yes-style::before {
+#yesBtn::before {
   content: "";
   position: absolute;
   inset: -12px;
   border-radius: inherit;
-  background: radial-gradient(circle, rgba(255,215,0,0.9), transparent 70%);
-  filter: blur(18px);
+  background: radial-gradient(circle, rgba(255,215,0,0.8), transparent 70%);
+  filter: blur(20px);
   opacity: 0;
   z-index: -1;
-  transition: 0.4s;
+  transition: opacity 0.3s ease;
 }
 
-.yes-style:hover {
+#yesBtn:hover {
   transform: scale(1.1);
 }
 
-.yes-style:hover::before {
+#yesBtn:hover::before {
   opacity: 1;
 }
 
-/* =================================================
+/* =========================
    NO BUTTON
-================================================= */
+========================= */
 
-.no-style {
+#noBtn {
   background: #e0e0e0;
   color: #111;
 }
 
-.no-style:hover {
+#noBtn:hover {
   transform: scale(1.1);
 }
 
-/* =================================================
+/* =========================
+   CLICK HERE BUTTON (CELEBRATION)
+========================= */
+
+#cameraBtn {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+
+  background: #e0e0e0;
+  color: #111;
+}
+
+#cameraBtn:hover {
+  background: #ff5a8a;
+  color: white;
+  transform: scale(1.08);
+}
+
+/* =========================
    TOP MESSAGE
-================================================= */
+========================= */
 
 #top-message {
   position: fixed;
@@ -166,9 +186,9 @@ h1 {
   opacity: 1;
 }
 
-/* =================================================
+/* =========================
    SAD BUBBLE
-================================================= */
+========================= */
 
 #sad-bubble {
   position: fixed;
@@ -184,33 +204,20 @@ h1 {
   box-shadow: 0 14px 36px rgba(0,0,0,0.45);
 }
 
-/* =================================================
-   CELEBRATION BUTTON (CLICK HERE)
-================================================= */
+/* =========================
+   CONFETTI CANVAS
+========================= */
 
-#cameraBtn {
-  position: absolute;
-  bottom: 25px;
-  left: 25px;
-  height: 56px;
-  min-width: 160px;
-  border-radius: 999px;
-  border: none;
-  background: #e0e0e0;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-#cameraBtn:hover {
-  background: #ff5a8a;
-  color: white;
-  transform: scale(1.05);
-}
-
-/* =================================================
+/* =========================
    CAMERA PAGE
-================================================= */
+========================= */
 
 .camera-page {
   margin: 0;
@@ -229,7 +236,8 @@ h1 {
 .camera-container video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .camera-filter {
@@ -237,13 +245,13 @@ h1 {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   pointer-events: none;
 }
 
-/* =================================================
+/* =========================
    SIDEBAR (RIGHT)
-================================================= */
+========================= */
 
 #sidebar {
   position: fixed;
@@ -256,9 +264,10 @@ h1 {
   box-shadow: -4px 0 20px rgba(0,0,0,0.2);
   transition: right 0.4s ease;
   z-index: 10;
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 #sidebar.open {
@@ -266,18 +275,20 @@ h1 {
 }
 
 #sidebar-toggle {
-  font-size: 24px;
+  position: absolute;
+  left: -30px;
+  top: 40px;
+  background: #ff5a8a;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 20px 0 0 20px;
   cursor: pointer;
-  align-self: flex-start;
+  font-weight: bold;
 }
 
 .sidebar-btn {
-  height: 48px;
-  border-radius: 36px;
-  border: none;
   background: #e0e0e0;
-  cursor: pointer;
-  transition: 0.3s;
+  color: #111;
 }
 
 .sidebar-btn.active {
@@ -289,9 +300,9 @@ h1 {
   transform: scale(1.05);
 }
 
-/* =================================================
+/* =========================
    COUNTDOWN
-================================================= */
+========================= */
 
 .countdown {
   position: absolute;
@@ -302,4 +313,5 @@ h1 {
   font-size: 180px;
   color: white;
   text-shadow: 0 0 40px rgba(0,0,0,0.8);
+  z-index: 5;
 }
