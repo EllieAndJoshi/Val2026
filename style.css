@@ -8,9 +8,9 @@ html, body {
   padding: 0;
 }
 
-/* =========================
-   MAIN PAGE
-========================= */
+/* =================================================
+   BASE BODY
+================================================= */
 
 body {
   background: #f6cbd6;
@@ -21,14 +21,16 @@ body {
   transition: 0.4s ease;
 }
 
+/* SAD MODE (ONLY VISUAL STATE) */
+
 body.sad {
   background: #6b6b6b;
   filter: grayscale(40%) brightness(0.85);
 }
 
-/* =========================
-   MAIN CARD
-========================= */
+/* =================================================
+   CARD (MAIN + CELEBRATION)
+================================================= */
 
 .card {
   background: white;
@@ -41,8 +43,32 @@ body.sad {
   position: relative;
 }
 
+/* Ensure celebration card stays centered */
+.celebrate {
+  background: #f6cbd6;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.celebration-card {
+  padding: 90px;
+}
+
+.celebration-card img {
+  width: 200px;
+  margin-bottom: 30px;
+}
+
+/* =================================================
+   ICON
+================================================= */
+
 .icon {
-  width: 150px;
+  width: 140px; /* slightly smaller gif */
   margin-bottom: 30px;
 }
 
@@ -51,15 +77,19 @@ h1 {
   margin-bottom: 60px;
 }
 
+/* =================================================
+   BUTTON CONTAINER
+================================================= */
+
 .buttons {
   display: flex;
   justify-content: center;
   gap: 60px;
 }
 
-/* =========================
-   PILL BUTTON
-========================= */
+/* =================================================
+   PILL BUTTON BASE
+================================================= */
 
 .pill-btn {
   height: 64px;
@@ -72,21 +102,23 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* YES BUTTON */
+/* =================================================
+   YES BUTTON
+================================================= */
 
-#yesBtn {
+.yes-style {
   background: #ff5a8a;
   color: white;
   position: relative;
 }
 
-#yesBtn::before {
+.yes-style::before {
   content: "";
   position: absolute;
-  inset: -10px;
+  inset: -12px;
   border-radius: inherit;
   background: radial-gradient(circle, rgba(255,215,0,0.9), transparent 70%);
   filter: blur(18px);
@@ -95,28 +127,30 @@ h1 {
   transition: 0.4s;
 }
 
-#yesBtn:hover {
+.yes-style:hover {
   transform: scale(1.1);
 }
 
-#yesBtn:hover::before {
+.yes-style:hover::before {
   opacity: 1;
 }
 
-/* NO BUTTON */
+/* =================================================
+   NO BUTTON
+================================================= */
 
-#noBtn {
+.no-style {
   background: #e0e0e0;
   color: #111;
 }
 
-#noBtn:hover {
+.no-style:hover {
   transform: scale(1.1);
 }
 
-/* =========================
+/* =================================================
    TOP MESSAGE
-========================= */
+================================================= */
 
 #top-message {
   position: fixed;
@@ -132,9 +166,9 @@ h1 {
   opacity: 1;
 }
 
-/* =========================
+/* =================================================
    SAD BUBBLE
-========================= */
+================================================= */
 
 #sad-bubble {
   position: fixed;
@@ -150,58 +184,33 @@ h1 {
   box-shadow: 0 14px 36px rgba(0,0,0,0.45);
 }
 
-/* =========================
-   CELEBRATION PAGE
-========================= */
-
-.celebrate {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #f6cbd6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.celebration-card {
-  background: white;
-  padding: 90px;
-  border-radius: 40px;
-  text-align: center;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-  position: relative;
-}
-
-.celebration-card img {
-  width: 200px;
-  margin-bottom: 30px;
-}
-
-/* Click Here Button */
+/* =================================================
+   CELEBRATION BUTTON (CLICK HERE)
+================================================= */
 
 #cameraBtn {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  height: 50px;
-  min-width: 150px;
+  bottom: 25px;
+  left: 25px;
+  height: 56px;
+  min-width: 160px;
   border-radius: 999px;
   border: none;
   background: #e0e0e0;
+  font-size: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 #cameraBtn:hover {
   background: #ff5a8a;
   color: white;
+  transform: scale(1.05);
 }
 
-/* =========================
+/* =================================================
    CAMERA PAGE
-========================= */
+================================================= */
 
 .camera-page {
   margin: 0;
@@ -232,7 +241,9 @@ h1 {
   pointer-events: none;
 }
 
-/* Sidebar RIGHT */
+/* =================================================
+   SIDEBAR (RIGHT)
+================================================= */
 
 #sidebar {
   position: fixed;
@@ -254,6 +265,12 @@ h1 {
   right: 0;
 }
 
+#sidebar-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
 .sidebar-btn {
   height: 48px;
   border-radius: 36px;
@@ -271,6 +288,10 @@ h1 {
 .sidebar-btn:hover {
   transform: scale(1.05);
 }
+
+/* =================================================
+   COUNTDOWN
+================================================= */
 
 .countdown {
   position: absolute;
