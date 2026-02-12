@@ -31,14 +31,14 @@ if (loginScreen) {
 
     const value = nameInput.value.trim().toLowerCase();
 
-    if (value === "elena" || value === "your wife") {
+    if (value === "elena" || value === "ta femme") {
 
       loginScreen.style.display = "none";
       mainContent.style.display = "block";
 
     } else {
 
-  loginError.textContent = "This is not for you then.";
+  loginError.textContent = "C'est pas pour toi alors.";
   nameInput.value = "";
 
   // Shake animation
@@ -94,7 +94,7 @@ yesBtn.addEventListener("mouseleave", () => {
     document.body.classList.remove("sad-hover");
 
     // Show message
-    topMessage.textContent = "It must be an error... please try again 💔";
+    topMessage.textContent = "Ahh t'as du te tromper, aller réessaie...";
     topMessage.classList.add("show-message");
 
     // Remove after 5s
