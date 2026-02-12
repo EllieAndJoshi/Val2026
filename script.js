@@ -1,3 +1,51 @@
+/* =================================================
+   LOGIN SYSTEM
+================================================= */
+
+const loginScreen = document.getElementById("login-screen");
+const mainContent = document.getElementById("main-content");
+
+const nameInput = document.getElementById("nameInput");
+const enterBtn = document.getElementById("enterBtn");
+const idkBtn = document.getElementById("idkBtn");
+const loginError = document.getElementById("login-error");
+
+if (loginScreen) {
+
+  idkBtn.addEventListener("click", () => {
+    window.open(
+      "https://youtu.be/M0a_68xnboc?si=QOHx9FVexeqSy0Kw",
+      "_blank"
+    );
+  });
+
+  enterBtn.addEventListener("click", checkLogin);
+
+  nameInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      checkLogin();
+    }
+  });
+
+  function checkLogin() {
+
+    const value = nameInput.value.trim().toLowerCase();
+
+    if (value === "elena" || value === "your wife") {
+
+      loginScreen.style.display = "none";
+      mainContent.style.display = "block";
+
+    } else {
+
+      loginError.textContent = "This is not for you then.";
+      nameInput.value = "";
+
+    }
+
+  }
+}
+
 const card = document.querySelector(".card");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");

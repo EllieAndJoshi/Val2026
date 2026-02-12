@@ -310,3 +310,53 @@ body.sad-hover {
   background-color: #d9d9d9;
   filter: grayscale(60%);
 }
+
+/* =========================
+   LOGIN SCREEN
+========================= */
+
+.login-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: #111;
+  padding: 80px;
+  border-radius: 40px;
+  text-align: center;
+  width: 600px;
+  max-width: 90vw;
+}
+
+.login-card h1 {
+  color: white;
+  margin-bottom: 40px;
+}
+
+.pill-input {
+  width: 100%;
+  height: 60px;
+  border-radius: 999px;
+  border: none;
+  padding: 0 25px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+#login-error {
+  color: #ff5a8a;
+  margin-top: 20px;
+  font-size: 18px;
+}
