@@ -99,10 +99,22 @@ h1 {
 }
 
 #top-message {
-  position: absolute;
+  position: fixed;
   top: 30px;
-  font-weight: 600;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff8fb1;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
   font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+}
+
+#top-message.show-message {
+  opacity: 1;
 }
 
 /* SAD FULL PAGE THEME */
@@ -112,11 +124,6 @@ body.sad-mode {
 
 body.sad-mode .card {
   background: #e0e0e0;
-}
-
-body.sad-mode h1,
-body.sad-mode #top-message {
-  color: #444;
 }
 
 /* =================================================
@@ -290,4 +297,16 @@ video {
   color: white;
   display: none;
   z-index: 10;
+}
+
+
+/* Smooth transition for whole page */
+body {
+  transition: background-color 0.4s ease, filter 0.4s ease;
+}
+
+/* Grey sad overlay */
+body.sad-hover {
+  background-color: #d9d9d9;
+  filter: grayscale(60%);
 }

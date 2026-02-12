@@ -18,20 +18,38 @@ yesBtn.addEventListener("mouseleave", () => {
   card.style.boxShadow = "0 20px 40px rgba(0,0,0,0.15)";
 });
 
-/* NO hover sad theme */
-noBtn.addEventListener("mouseenter", () => {
-  document.body.classList.add("sad-mode");
-});
+  /* =========================
+     NO HOVER → SAD MODE
+  ========================= */
 
-noBtn.addEventListener("mouseleave", () => {
-  document.body.classList.remove("sad-mode");
-});
+  noBtn.addEventListener("mouseenter", () => {
+    document.body.classList.add("sad-hover");
+  });
 
-/* NO click top message */
-noBtn.addEventListener("click", () => {
-  topMessage.textContent = "It must be an error... please try again 💔";
-});
+  noBtn.addEventListener("mouseleave", () => {
+    document.body.classList.remove("sad-hover");
+  });
 
+  /* =========================
+     NO CLICK → MESSAGE ONLY
+  ========================= */
+
+  noBtn.addEventListener("click", () => {
+
+    // Make sure grey mode is removed
+    document.body.classList.remove("sad-hover");
+
+    // Show message
+    topMessage.textContent = "It must be an error... please try again 💔";
+    topMessage.classList.add("show-message");
+
+    // Remove after 5s
+    setTimeout(() => {
+      topMessage.classList.remove("show-message");
+      topMessage.textContent = "";
+    }, 5000);
+
+  });
 
 /* =================================================
    CELEBRATION PAGE LOGIC
