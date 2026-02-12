@@ -38,10 +38,16 @@ if (loginScreen) {
 
     } else {
 
-      loginError.textContent = "This is not for you then.";
-      nameInput.value = "";
+  loginError.textContent = "This is not for you then.";
+  nameInput.value = "";
 
-    }
+  // Shake animation
+  const card = document.querySelector(".login-card");
+  card.classList.remove("shake"); // reset if triggered quickly
+  void card.offsetWidth; // force reflow
+  card.classList.add("shake");
+
+}
 
   }
 }
