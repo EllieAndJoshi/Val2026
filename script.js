@@ -85,7 +85,7 @@ yesBtn.addEventListener("mouseleave", () => {
   });
 
   /* =========================
-     NO CLICK → MESSAGE ONLY
+     NO CLICK → MESSAGE ONLY   
   ========================= */
 
   noBtn.addEventListener("click", () => {
